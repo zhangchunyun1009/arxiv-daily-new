@@ -21,6 +21,7 @@ const el = {
   status: document.querySelector("#status"),
   papers: document.querySelector("#papers-container"),
   search: document.querySelector("#search-input"),
+  refresh: document.querySelector("#refresh-toggle"),
   favorites: document.querySelector("#favorites-toggle"),
   unread: document.querySelector("#unread-toggle"),
   sidebar: document.querySelector("#sidebar"),
@@ -280,6 +281,25 @@ el.papers.addEventListener("click", (event) => {
 el.search.addEventListener("input", (event) => {
   state.searchQuery = event.target.value.trim();
   renderPapers();
+});
+
+el.refresh.addEventListener("click", async () => {
+  el.refresh.disabled = true;
+  const originalText = el.refresh.textContent;
+  el.refresh.textContent = "⏳ 已提交更新...";
+  try {
+    const response = await fetch("/api/refresh", { method: "POST" });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.error || `HTTP ${response.status}`);
+    }
+    showStatus("已触发后台更新。GitHub Actions 跑完并重新部署后，刷新页面即可看到新增论文。");
+  } catch (error) {
+    showStatus(`触发更新失败：${error.message}`, "warning");
+  } finally {
+    el.refresh.disabled = false;
+    el.refresh.textContent = originalText;
+  }
 });
 
 el.favorites.addEventListener("click", () => {

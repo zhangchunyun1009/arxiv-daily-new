@@ -221,6 +221,25 @@ body {
   padding: 8px 14px;
 }
 
+.toolbar-btn.primary {
+  border: 0;
+  background: linear-gradient(135deg, #66bb6a, var(--green-2));
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 187, 106, 0.28);
+}
+
+.toolbar-btn.primary:hover {
+  background: linear-gradient(135deg, #5caf60, #22968b);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.toolbar-btn:disabled {
+  cursor: wait;
+  opacity: 0.62;
+  transform: none;
+}
+
 .sidebar-toggle:hover,
 .toolbar-btn:hover,
 .toolbar-btn.active {

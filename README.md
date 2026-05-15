@@ -32,6 +32,20 @@ npm run dev
 
 如果 Vercel 项目连接了这个 GitHub 仓库，新的数据提交会触发一次重新部署。
 
+## 手动更新按钮
+
+页面里的“刷新今日数据”按钮会触发 GitHub Actions 手动运行一次同样的更新流程。因为浏览器不能安全地直接写 GitHub 仓库，这个按钮通过 Vercel Serverless Function 调用 GitHub API。
+
+在 Vercel 项目里需要配置环境变量：
+
+- `GITHUB_DISPATCH_TOKEN`：GitHub fine-grained token，需要允许当前仓库的 Actions workflow dispatch。
+- `GITHUB_REPO_OWNER`：默认 `zhangchunyun1009`。
+- `GITHUB_REPO_NAME`：默认 `arxiv-daily-new`。
+- `GITHUB_WORKFLOW_ID`：默认 `update-papers.yml`。
+- `GITHUB_WORKFLOW_BRANCH`：默认 `main`。
+
+配置完环境变量后，需要重新部署一次 Vercel 项目。按钮触发后，GitHub Actions 跑完、提交数据、Vercel 自动重新部署，页面刷新后就能看到新增论文。
+
 ## 调整方向
 
 研究方向和检索式在 `src/topics.mjs`。每个方向需要稳定的 `id`，历史数据会用这个 `id` 做增量去重，不再用容易错位的数组下标。
