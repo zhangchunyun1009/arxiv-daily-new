@@ -108,11 +108,7 @@ async function loadDate(date) {
 }
 
 function renderHeader() {
-  const data = currentData();
-  const generated = data?.generatedAt
-    ? ` · 生成于 ${new Date(data.generatedAt).toLocaleString("zh-CN", { hour12: false })}`
-    : " · 等待首次自动抓取";
-  el.headerDate.textContent = `${state.selectedDate || todayLocal()}${generated}`;
+  el.headerDate.textContent = state.selectedDate || todayLocal();
 }
 
 function renderDates() {
