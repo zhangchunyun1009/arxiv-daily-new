@@ -310,6 +310,7 @@ body {
 }
 
 .tab {
+  position: relative;
   border: 1.5px solid #e0e7e1;
   border-radius: 20px;
   background: white;
@@ -349,6 +350,29 @@ body {
   background: rgba(255, 255, 255, 0.28);
 }
 
+.tab-star {
+  margin-left: 5px;
+  color: currentColor;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0.38;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.tab-star:hover,
+.tab-star.is-home {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.tab.active .tab-star {
+  opacity: 0.72;
+}
+
+.tab.active .tab-star.is-home {
+  opacity: 1;
+}
+
 .status-box {
   display: none;
   margin: 24px;
@@ -363,6 +387,12 @@ body {
 
 .status-box.warning {
   color: var(--gold);
+}
+
+.status-icon {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 14px;
 }
 
 .papers-container {

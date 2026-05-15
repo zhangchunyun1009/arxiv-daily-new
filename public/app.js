@@ -2,6 +2,7 @@ const INDEX_URL = "/data/index.json";
 const LATEST_URL = "/data/latest.json";
 const FAVORITES_KEY = "arxiv_favorites";
 const READ_KEY = "arxiv_read";
+const HOME_TOPIC_KEY = "arxiv_home_topic";
 
 const state = {
   index: null,
@@ -40,6 +41,18 @@ function writeSet(key, values) {
   localStorage.setItem(key, JSON.stringify([...values]));
 }
 
+function getHomeTopicId() {
+  return localStorage.getItem(HOME_TOPIC_KEY) || "";
+}
+
+function setHomeTopicId(topicId) {
+  if (getHomeTopicId() === topicId) {
+    localStorage.removeItem(HOME_TOPIC_KEY);
+  } else {
+    localStorage.setItem(HOME_TOPIC_KEY, topicId);
+  }
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -70,7 +83,7 @@ function currentTopic() {
 }
 
 function showStatus(message, kind = "") {
-  el.status.textContent = message;
+  el.status.innerHTML = `<div class="status-icon">🌱</div><div>${escapeHtml(message)}</div>`;
   el.status.className = `status-box show ${kind}`.trim();
   el.papers.innerHTML = "";
 }
@@ -123,12 +136,15 @@ function renderTabs() {
     return;
   }
 
+  const homeTopicId = getHomeTopicId();
   el.tabs.innerHTML = data.topics.map((topic) => {
     const active = topic.id === state.activeTopicId ? " active" : "";
+    const home = topic.id === homeTopicId ? " is-home" : "";
     return `
       <button class="tab${active}" type="button" data-topic-id="${escapeHtml(topic.id)}">
         ${escapeHtml(topic.name)}
         <span class="tab-badge">${topic.papers.length}</span>
+        <span class="tab-star${home}" data-home-topic-id="${escapeHtml(topic.id)}" title="${home ? "取消默认方向" : "设为默认方向"}">★</span>
       </button>
     `;
   }).join("");
@@ -230,8 +246,11 @@ function render() {
 async function selectDate(date) {
   showStatus("正在加载论文数据...");
   const data = await loadDate(date);
+  const homeTopicId = getHomeTopicId();
   state.selectedDate = data.date;
-  state.activeTopicId = data.topics[0]?.id || null;
+  state.activeTopicId = data.topics.some((topic) => topic.id === homeTopicId)
+    ? homeTopicId
+    : data.topics[0]?.id || null;
   state.favoritesOnly = false;
   render();
 }
@@ -260,6 +279,16 @@ el.dateList.addEventListener("click", async (event) => {
 });
 
 el.tabs.addEventListener("click", (event) => {
+  const star = event.target.closest("[data-home-topic-id]");
+  if (star) {
+    event.stopPropagation();
+    setHomeTopicId(star.dataset.homeTopicId);
+    state.activeTopicId = star.dataset.homeTopicId;
+    state.favoritesOnly = false;
+    render();
+    return;
+  }
+
   const button = event.target.closest("[data-topic-id]");
   if (!button) return;
   state.activeTopicId = button.dataset.topicId;
