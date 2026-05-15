@@ -3,10 +3,10 @@
   "dates": [
     {
       "date": "2026-05-15",
-      "generatedAt": null,
+      "generatedAt": "2026-05-15T09:18:16.535Z",
       "topicCount": 8,
-      "paperCount": 0,
-      "path": "/data/latest.json"
+      "paperCount": 255,
+      "path": "/data/2026-05-15.json"
     }
   ]
 }

@@ -102,7 +102,30 @@ async function fetchQuery(query) {
   }
 }
 
-async function fetchTopic(topic) {
+async function loadHistoricalPaperIds(currentDate) {
+  await mkdir(DATA_DIR, { recursive: true });
+
+  const knownByTopic = new Map(TOPICS.map((topic) => [topic.id, new Set()]));
+  const files = await readdir(DATA_DIR).catch(() => []);
+  const datedFiles = files
+    .filter((file) => /^\d{4}-\d{2}-\d{2}\.json$/.test(file))
+    .filter((file) => file !== `${currentDate}.json`);
+
+  for (const file of datedFiles) {
+    const payload = JSON.parse(await readFile(new URL(file, DATA_DIR), "utf8"));
+    for (const topic of payload.topics || []) {
+      const known = knownByTopic.get(topic.id) || new Set();
+      for (const paper of topic.papers || []) {
+        if (paper.id) known.add(paper.id);
+      }
+      knownByTopic.set(topic.id, known);
+    }
+  }
+
+  return knownByTopic;
+}
+
+async function fetchTopic(topic, historicalIds) {
   const seen = new Set();
   const papers = [];
   const errors = [];
@@ -111,7 +134,7 @@ async function fetchTopic(topic) {
     try {
       const queryPapers = await fetchQuery(query);
       for (const paper of queryPapers) {
-        if (!seen.has(paper.id)) {
+        if (!historicalIds.has(paper.id) && !seen.has(paper.id)) {
           seen.add(paper.id);
           papers.push(paper);
         }
@@ -130,10 +153,11 @@ async function main() {
   const date = process.env.ARXIV_DATE || todayInShanghai();
   const topics = [];
   const startedAt = new Date().toISOString();
+  const historicalIdsByTopic = await loadHistoricalPaperIds(date);
 
   for (const topic of TOPICS) {
     console.log(`Fetching ${topic.name}`);
-    topics.push(await fetchTopic(topic));
+    topics.push(await fetchTopic(topic, historicalIdsByTopic.get(topic.id) || new Set()));
   }
 
   const failedQueries = topics.flatMap((topic) => topic.errors.map((error) => ({
@@ -154,6 +178,8 @@ async function main() {
     startedAt,
     source: "arXiv API",
     maxResultsPerQuery: MAX_RESULTS,
+    mode: "incremental",
+    historicalPaperCount: [...historicalIdsByTopic.values()].reduce((sum, ids) => sum + ids.size, 0),
     topics: topics.map(({ errors, queries, ...topic }) => topic)
   };
 
