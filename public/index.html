@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arxiv 论文速递 - IDA Lab</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>Arxiv 论文速递</h1>
+      <p>IDA 的小伙伴们，用阅读最新论文开启新的一天</p>
+      <div class="header-meta">
+        <span id="data-date">加载中</span>
+        <span id="generated-at">等待数据</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-title">研究方向</div>
+        <nav id="topic-list" class="topic-list" aria-label="研究方向"></nav>
+      </aside>
+
+      <section class="content">
+        <div class="toolbar">
+          <div class="search-box">
+            <input id="search-input" type="search" placeholder="搜索标题、作者或摘要">
+          </div>
+          <button id="favorites-toggle" class="ghost-button" type="button">收藏</button>
+          <button id="unread-toggle" class="ghost-button" type="button">未读</button>
+        </div>
+
+        <div id="status" class="status">正在加载论文数据...</div>
+        <div id="paper-list" class="paper-list"></div>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

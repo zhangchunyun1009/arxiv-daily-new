@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-05-15",
+  "generatedAt": null,
+  "startedAt": null,
+  "source": "arXiv API",
+  "maxResultsPerQuery": 20,
+  "topics": [
+    {
+      "id": "multimodal-llm-distillation",
+      "name": "多模态大语言模型蒸馏",
+      "papers": []
+    },
+    {
+      "id": "diffusion-models",
+      "name": "扩散模型",
+      "papers": []
+    },
+    {
+      "id": "test-time-adaptation",
+      "name": "测试时领域自适应",
+      "papers": []
+    },
+    {
+      "id": "automated-essay-scoring",
+      "name": "作文评分",
+      "papers": []
+    },
+    {
+      "id": "knowledge-tracing",
+      "name": "知识追踪",
+      "papers": []
+    },
+    {
+      "id": "prompt-learning",
+      "name": "提示学习",
+      "papers": []
+    },
+    {
+      "id": "industrial-anomaly-detection",
+      "name": "工业异常检测",
+      "papers": []
+    },
+    {
+      "id": "adversarial-attacks",
+      "name": "对抗攻击",
+      "papers": []
+    }
+  ]
+}

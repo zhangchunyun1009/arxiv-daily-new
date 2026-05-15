@@ -1,0 +1,17 @@
+{
+  "name": "arxiv-daily",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "serve public",
+    "fetch": "node scripts/fetch-arxiv.mjs",
+    "test": "node scripts/validate-data.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
