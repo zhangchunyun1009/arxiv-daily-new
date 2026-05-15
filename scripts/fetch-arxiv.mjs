@@ -38,6 +38,10 @@ function normalizeText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
+function datePart(value) {
+  return String(value || "").slice(0, 10);
+}
+
 function buildUrl(query) {
   const params = new URLSearchParams({
     search_query: query,
@@ -125,7 +129,7 @@ async function loadHistoricalPaperIds(currentDate) {
   return knownByTopic;
 }
 
-async function fetchTopic(topic, historicalIds) {
+async function fetchTopic(topic, historicalIds, targetDate) {
   const seen = new Set();
   const papers = [];
   const errors = [];
@@ -134,7 +138,7 @@ async function fetchTopic(topic, historicalIds) {
     try {
       const queryPapers = await fetchQuery(query);
       for (const paper of queryPapers) {
-        if (!historicalIds.has(paper.id) && !seen.has(paper.id)) {
+        if (datePart(paper.published) === targetDate && !historicalIds.has(paper.id) && !seen.has(paper.id)) {
           seen.add(paper.id);
           papers.push(paper);
         }
@@ -157,7 +161,7 @@ async function main() {
 
   for (const topic of TOPICS) {
     console.log(`Fetching ${topic.name}`);
-    topics.push(await fetchTopic(topic, historicalIdsByTopic.get(topic.id) || new Set()));
+    topics.push(await fetchTopic(topic, historicalIdsByTopic.get(topic.id) || new Set(), date));
   }
 
   const failedQueries = topics.flatMap((topic) => topic.errors.map((error) => ({
@@ -178,7 +182,7 @@ async function main() {
     startedAt,
     source: "arXiv API",
     maxResultsPerQuery: MAX_RESULTS,
-    mode: "incremental",
+    mode: "daily-submitted-incremental",
     historicalPaperCount: [...historicalIdsByTopic.values()].reduce((sum, ids) => sum + ids.size, 0),
     topics: topics.map(({ errors, queries, ...topic }) => topic)
   };

@@ -7,7 +7,7 @@
 - `scripts/fetch-arxiv.mjs` 每天按研究方向请求 arXiv API。
 - 请求之间默认等待 3.5 秒，避免触发 arXiv 限流。
 - 任意 query 失败时不会写入数据，避免把错误缓存成“0 篇论文”。
-- 默认使用增量模式：脚本会读取 `public/data/YYYY-MM-DD.json` 历史文件，按研究方向过滤掉已经出现过的论文，只把新增论文写入当天文件。
+- 默认使用“当天 submitted + 增量去重”模式：脚本只保留 arXiv `published` 日期等于当天北京时间日期的论文，同时读取 `public/data/YYYY-MM-DD.json` 历史文件，按研究方向过滤掉已经出现过的论文。
 - `public/data/index.json` 维护左侧历史日期列表。
 - `public/data/latest.json` 指向最近一次成功生成的数据，便于前端快速加载。
 
