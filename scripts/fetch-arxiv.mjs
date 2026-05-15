@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { XMLParser } from "fast-xml-parser";
 import { TOPICS } from "../src/topics.mjs";
 
@@ -160,7 +160,27 @@ async function main() {
   await mkdir(DATA_DIR, { recursive: true });
   await writeFile(new URL(`${date}.json`, DATA_DIR), `${JSON.stringify(payload, null, 2)}\n`);
   await writeFile(new URL("latest.json", DATA_DIR), `${JSON.stringify(payload, null, 2)}\n`);
-  console.log(`Wrote ${date}.json and latest.json`);
+  await writeIndex();
+  console.log(`Wrote ${date}.json, latest.json, and index.json`);
+}
+
+async function writeIndex() {
+  const files = await readdir(DATA_DIR);
+  const datedFiles = files.filter((file) => /^\d{4}-\d{2}-\d{2}\.json$/.test(file)).sort().reverse();
+  const dates = [];
+
+  for (const file of datedFiles) {
+    const payload = JSON.parse(await readFile(new URL(file, DATA_DIR), "utf8"));
+    dates.push({
+      date: payload.date,
+      generatedAt: payload.generatedAt,
+      topicCount: payload.topics?.length || 0,
+      paperCount: (payload.topics || []).reduce((sum, topic) => sum + (topic.papers?.length || 0), 0),
+      path: `/data/${file}`
+    });
+  }
+
+  await writeFile(new URL("index.json", DATA_DIR), `${JSON.stringify({ schemaVersion: 1, dates }, null, 2)}\n`);
 }
 
 main().catch((error) => {

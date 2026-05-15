@@ -1,24 +1,30 @@
-const DATA_URL = "/data/latest.json";
+const INDEX_URL = "/data/index.json";
+const LATEST_URL = "/data/latest.json";
 const FAVORITES_KEY = "arxiv_favorites";
 const READ_KEY = "arxiv_read";
 
 const state = {
-  data: null,
+  index: null,
+  dataByDate: new Map(),
+  selectedDate: null,
   activeTopicId: null,
-  query: "",
+  searchQuery: "",
   favoritesOnly: false,
-  unreadOnly: false
+  unreadOnly: false,
+  sidebarOpen: true
 };
 
-const elements = {
-  dataDate: document.querySelector("#data-date"),
-  generatedAt: document.querySelector("#generated-at"),
-  topicList: document.querySelector("#topic-list"),
-  paperList: document.querySelector("#paper-list"),
+const el = {
+  headerDate: document.querySelector("#header-date"),
+  dateList: document.querySelector("#date-list"),
+  tabs: document.querySelector("#tabs"),
   status: document.querySelector("#status"),
-  searchInput: document.querySelector("#search-input"),
-  favoritesToggle: document.querySelector("#favorites-toggle"),
-  unreadToggle: document.querySelector("#unread-toggle")
+  papers: document.querySelector("#papers-container"),
+  search: document.querySelector("#search-input"),
+  favorites: document.querySelector("#favorites-toggle"),
+  unread: document.querySelector("#unread-toggle"),
+  sidebar: document.querySelector("#sidebar"),
+  sidebarToggle: document.querySelector("#sidebar-toggle")
 };
 
 function readSet(key) {
@@ -29,8 +35,8 @@ function readSet(key) {
   }
 }
 
-function writeSet(key, value) {
-  localStorage.setItem(key, JSON.stringify([...value]));
+function writeSet(key, values) {
+  localStorage.setItem(key, JSON.stringify([...values]));
 }
 
 function escapeHtml(value) {
@@ -42,33 +48,107 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-function formatDate(value) {
-  if (!value) return "";
+function todayLocal() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function formatPublished(value) {
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return value.slice(0, 10);
+  if (Number.isNaN(date.getTime())) return String(value || "").slice(0, 10);
   return date.toISOString().slice(0, 10);
 }
 
-function formatGeneratedAt(value) {
-  if (!value) return "尚未生成真实数据";
-  return `生成于 ${new Date(value).toLocaleString("zh-CN", { hour12: false })}`;
+function currentData() {
+  return state.dataByDate.get(state.selectedDate);
 }
 
-function activeTopic() {
-  return state.data?.topics.find((topic) => topic.id === state.activeTopicId) || state.data?.topics[0];
+function currentTopic() {
+  const data = currentData();
+  return data?.topics.find((topic) => topic.id === state.activeTopicId) || data?.topics[0];
 }
 
-function allPapers() {
-  return state.data.topics.flatMap((topic) => topic.papers.map((paper) => ({ ...paper, topicName: topic.name })));
+function showStatus(message, kind = "") {
+  el.status.textContent = message;
+  el.status.className = `status-box show ${kind}`.trim();
+  el.papers.innerHTML = "";
+}
+
+function clearStatus() {
+  el.status.className = "status-box";
+  el.status.textContent = "";
+}
+
+async function fetchJson(url) {
+  const response = await fetch(`${url}?t=${Date.now()}`);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
+
+async function loadDate(date) {
+  if (state.dataByDate.has(date)) return state.dataByDate.get(date);
+  const item = state.index.dates.find((entry) => entry.date === date);
+  const data = await fetchJson(item?.path || LATEST_URL);
+  state.dataByDate.set(data.date, data);
+  return data;
+}
+
+function renderHeader() {
+  const data = currentData();
+  const generated = data?.generatedAt
+    ? ` · 生成于 ${new Date(data.generatedAt).toLocaleString("zh-CN", { hour12: false })}`
+    : " · 等待首次自动抓取";
+  el.headerDate.textContent = `${state.selectedDate || todayLocal()}${generated}`;
+}
+
+function renderDates() {
+  const today = todayLocal();
+  el.dateList.innerHTML = state.index.dates.map((entry) => {
+    const active = entry.date === state.selectedDate ? " active" : "";
+    const isToday = entry.date === today ? " today" : "";
+    return `
+      <button class="date-item${active}${isToday}" type="button" data-date="${escapeHtml(entry.date)}">
+        <span class="date-dot"></span>
+        <span>${escapeHtml(entry.date)}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderTabs() {
+  const data = currentData();
+  if (!data) {
+    el.tabs.innerHTML = "";
+    return;
+  }
+
+  el.tabs.innerHTML = data.topics.map((topic) => {
+    const active = topic.id === state.activeTopicId ? " active" : "";
+    return `
+      <button class="tab${active}" type="button" data-topic-id="${escapeHtml(topic.id)}">
+        ${escapeHtml(topic.name)}
+        <span class="tab-badge">${topic.papers.length}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function allPapersForDate() {
+  const data = currentData();
+  return data.topics.flatMap((topic) => topic.papers.map((paper) => ({
+    ...paper,
+    topicName: topic.name
+  })));
 }
 
 function filteredPapers() {
+  const topic = currentTopic();
   const favorites = readSet(FAVORITES_KEY);
   const reads = readSet(READ_KEY);
-  const source = state.favoritesOnly ? allPapers() : activeTopic().papers;
-  const query = state.query.toLowerCase();
+  const query = state.searchQuery.toLowerCase();
+  const base = state.favoritesOnly ? allPapersForDate() : (topic?.papers || []);
 
-  return source.filter((paper) => {
+  return base.filter((paper) => {
     if (state.favoritesOnly && !favorites.has(paper.id)) return false;
     if (state.unreadOnly && reads.has(paper.id)) return false;
     if (!query) return true;
@@ -76,114 +156,109 @@ function filteredPapers() {
       paper.title,
       paper.summary,
       paper.authors?.join(" "),
-      paper.categories?.join(" ")
+      paper.categories?.join(" "),
+      paper.topicName
     ].join(" ").toLowerCase().includes(query);
   });
 }
 
-function setStatus(message, kind = "") {
-  elements.status.textContent = message;
-  elements.status.className = `status show ${kind}`.trim();
-  elements.paperList.innerHTML = "";
-}
-
-function clearStatus() {
-  elements.status.className = "status";
-  elements.status.textContent = "";
-}
-
-function renderTopics() {
-  const topicButtons = state.data.topics.map((topic) => {
-    const active = topic.id === state.activeTopicId ? " active" : "";
-    return `
-      <button class="topic-button${active}" type="button" data-topic-id="${escapeHtml(topic.id)}">
-        <span>${escapeHtml(topic.name)}</span>
-        <span class="count">${topic.papers.length}</span>
-      </button>
-    `;
-  }).join("");
-  elements.topicList.innerHTML = topicButtons;
-}
-
 function renderPapers() {
-  const topic = activeTopic();
+  const data = currentData();
+  const topic = currentTopic();
+  if (!data) return;
+
+  el.favorites.classList.toggle("active", state.favoritesOnly);
+  el.unread.classList.toggle("active", state.unreadOnly);
+
+  if (!data.generatedAt) {
+    showStatus("当前还没有真实抓取的数据。GitHub Actions 第一次运行成功后，这里会显示每日论文。", "warning");
+    return;
+  }
+
   const papers = filteredPapers();
-  const favorites = readSet(FAVORITES_KEY);
-  const reads = readSet(READ_KEY);
-
-  elements.favoritesToggle.classList.toggle("active", state.favoritesOnly);
-  elements.unreadToggle.classList.toggle("active", state.unreadOnly);
-
-  if (!state.data.generatedAt) {
-    setStatus("当前仓库里还没有真实抓取的数据。部署后由 GitHub Actions 每天生成 public/data/latest.json。", "warning");
-    renderTopics();
+  if (papers.length === 0) {
+    showStatus("暂无匹配论文。");
     return;
   }
 
   clearStatus();
+  const favorites = readSet(FAVORITES_KEY);
+  const reads = readSet(READ_KEY);
+  const label = state.favoritesOnly ? "⭐ 收藏论文" : `🍀 ${state.selectedDate} · ${topic.name}`;
 
-  if (papers.length === 0) {
-    const label = state.favoritesOnly ? "收藏列表" : topic.name;
-    setStatus(`${label} 下没有匹配论文。`);
-    return;
-  }
-
-  const label = state.favoritesOnly ? "收藏论文" : `${topic.name}`;
-  const rows = papers.map((paper) => {
-    const isFavorite = favorites.has(paper.id);
-    const isRead = reads.has(paper.id);
+  const cards = papers.map((paper) => {
+    const favorite = favorites.has(paper.id);
+    const read = reads.has(paper.id);
+    const topicTag = state.favoritesOnly ? `<span>${escapeHtml(paper.topicName)}</span>` : "";
     const categories = (paper.categories || []).slice(0, 4).map((category) => (
-      `<span>${escapeHtml(category)}</span>`
+      `<span class="category-tag">${escapeHtml(category)}</span>`
     )).join("");
-    const topicChip = state.favoritesOnly && paper.topicName ? `<span>${escapeHtml(paper.topicName)}</span>` : "";
+
     return `
-      <article class="paper-card${isRead ? " read" : ""}">
-        <div class="paper-head">
+      <article class="paper${read ? " read" : ""}">
+        <div class="paper-header">
           <h2 class="paper-title">
             <a href="${escapeHtml(paper.id)}" target="_blank" rel="noopener noreferrer">${escapeHtml(paper.title)}</a>
           </h2>
           <div class="paper-actions">
-            <button class="icon-button${isFavorite ? " active" : ""}" type="button" data-action="favorite" data-id="${escapeHtml(paper.id)}" title="${isFavorite ? "取消收藏" : "收藏"}">★</button>
-            <button class="icon-button${isRead ? " read-active" : ""}" type="button" data-action="read" data-id="${escapeHtml(paper.id)}" title="${isRead ? "标为未读" : "标为已读"}">✓</button>
+            <button class="paper-action-btn${favorite ? " active" : ""}" data-action="favorite" data-id="${escapeHtml(paper.id)}" title="${favorite ? "取消收藏" : "收藏"}">⭐</button>
+            <button class="paper-action-btn${read ? " read-active" : ""}" data-action="read" data-id="${escapeHtml(paper.id)}" title="${read ? "标为未读" : "标为已读"}">✓</button>
           </div>
         </div>
-        <div class="meta">
-          <span>${escapeHtml(formatDate(paper.published))}</span>
-          ${topicChip}
+        <div class="paper-meta">
+          <span>${escapeHtml(formatPublished(paper.published))}</span>
+          ${topicTag}
           ${categories}
         </div>
-        <p class="authors"><strong>Authors:</strong> ${escapeHtml((paper.authors || []).join(", "))}</p>
-        <div class="abstract">${escapeHtml(paper.summary)}</div>
+        <p class="paper-authors"><strong>Authors: </strong>${escapeHtml((paper.authors || []).join(", "))}</p>
+        <div class="paper-abstract">${escapeHtml(paper.summary)}</div>
       </article>
     `;
   }).join("");
 
-  elements.paperList.innerHTML = `
-    <div class="paper-summary">${escapeHtml(label)} · 共 ${papers.length} 篇</div>
-    ${rows}
-  `;
+  el.papers.innerHTML = `<div class="paper-count">${label} · 共 ${papers.length} 篇</div>${cards}`;
 }
 
 function render() {
-  elements.dataDate.textContent = state.data.date;
-  elements.generatedAt.textContent = formatGeneratedAt(state.data.generatedAt);
-  renderTopics();
+  renderHeader();
+  renderDates();
+  renderTabs();
   renderPapers();
 }
 
-async function loadData() {
+async function selectDate(date) {
+  showStatus("正在加载论文数据...");
+  const data = await loadDate(date);
+  state.selectedDate = data.date;
+  state.activeTopicId = data.topics[0]?.id || null;
+  state.favoritesOnly = false;
+  render();
+}
+
+async function init() {
   try {
-    const response = await fetch(`${DATA_URL}?t=${Date.now()}`);
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.data = await response.json();
-    state.activeTopicId = state.data.topics[0]?.id;
-    render();
+    state.index = await fetchJson(INDEX_URL);
+    if (!state.index.dates?.length) {
+      const latest = await fetchJson(LATEST_URL);
+      state.index = {
+        schemaVersion: 1,
+        dates: [{ date: latest.date, path: LATEST_URL }]
+      };
+      state.dataByDate.set(latest.date, latest);
+    }
+    await selectDate(state.index.dates[0].date);
   } catch (error) {
-    setStatus(`数据加载失败：${error.message}`, "warning");
+    showStatus(`数据加载失败：${error.message}`, "warning");
   }
 }
 
-elements.topicList.addEventListener("click", (event) => {
+el.dateList.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-date]");
+  if (!button) return;
+  await selectDate(button.dataset.date);
+});
+
+el.tabs.addEventListener("click", (event) => {
   const button = event.target.closest("[data-topic-id]");
   if (!button) return;
   state.activeTopicId = button.dataset.topicId;
@@ -191,7 +266,7 @@ elements.topicList.addEventListener("click", (event) => {
   render();
 });
 
-elements.paperList.addEventListener("click", (event) => {
+el.papers.addEventListener("click", (event) => {
   const button = event.target.closest("[data-action]");
   if (!button) return;
   const key = button.dataset.action === "favorite" ? FAVORITES_KEY : READ_KEY;
@@ -202,19 +277,24 @@ elements.paperList.addEventListener("click", (event) => {
   renderPapers();
 });
 
-elements.searchInput.addEventListener("input", (event) => {
-  state.query = event.target.value.trim();
+el.search.addEventListener("input", (event) => {
+  state.searchQuery = event.target.value.trim();
   renderPapers();
 });
 
-elements.favoritesToggle.addEventListener("click", () => {
+el.favorites.addEventListener("click", () => {
   state.favoritesOnly = !state.favoritesOnly;
   renderPapers();
 });
 
-elements.unreadToggle.addEventListener("click", () => {
+el.unread.addEventListener("click", () => {
   state.unreadOnly = !state.unreadOnly;
   renderPapers();
 });
 
-loadData();
+el.sidebarToggle.addEventListener("click", () => {
+  state.sidebarOpen = !state.sidebarOpen;
+  el.sidebar.classList.toggle("collapsed", !state.sidebarOpen);
+});
+
+init();

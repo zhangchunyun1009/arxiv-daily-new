@@ -8,31 +8,31 @@
   </head>
   <body>
     <header class="site-header">
-      <h1>Arxiv 论文速递</h1>
-      <p>IDA 的小伙伴们，用阅读最新论文开启新的一天</p>
-      <div class="header-meta">
-        <span id="data-date">加载中</span>
-        <span id="generated-at">等待数据</span>
-      </div>
+      <h1><span>Arxiv 论文速递</span></h1>
+      <p><span class="leaf">🌱</span> IDA 的小伙伴们，用阅读最新论文开启新的一天！ <span class="leaf">🌱</span></p>
+      <div id="header-date" class="header-date">加载中</div>
     </header>
 
-    <main class="layout">
-      <aside class="sidebar">
-        <div class="sidebar-title">研究方向</div>
-        <nav id="topic-list" class="topic-list" aria-label="研究方向"></nav>
+    <main class="main-wrapper">
+      <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">📅 历史记录</div>
+        <div id="date-list" class="date-list"></div>
       </aside>
 
-      <section class="content">
+      <section class="content-area">
         <div class="toolbar">
+          <button id="sidebar-toggle" class="sidebar-toggle" type="button" title="切换侧边栏">☰</button>
+          <button id="favorites-toggle" class="toolbar-btn ghost" type="button">⭐ 收藏</button>
+          <button id="unread-toggle" class="toolbar-btn ghost" type="button">✓ 未读</button>
           <div class="search-box">
-            <input id="search-input" type="search" placeholder="搜索标题、作者或摘要">
+            <input id="search-input" type="search" placeholder="搜索论文...">
           </div>
-          <button id="favorites-toggle" class="ghost-button" type="button">收藏</button>
-          <button id="unread-toggle" class="ghost-button" type="button">未读</button>
+          <div class="auto-status"><span></span>每日 8:30 自动更新</div>
         </div>
 
-        <div id="status" class="status">正在加载论文数据...</div>
-        <div id="paper-list" class="paper-list"></div>
+        <div id="tabs" class="tabs-wrapper"></div>
+        <div id="status" class="status-box">正在加载论文数据...</div>
+        <div id="papers-container" class="papers-container"></div>
       </section>
     </main>
 
