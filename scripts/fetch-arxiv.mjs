@@ -4,8 +4,9 @@ import { TOPICS } from "../src/topics.mjs";
 
 const API_URL = "https://export.arxiv.org/api/query";
 const REQUEST_DELAY_MS = Number(process.env.ARXIV_REQUEST_DELAY_MS || 3500);
-const MAX_RESULTS = Number(process.env.ARXIV_MAX_RESULTS || 20);
+const MAX_RESULTS = Number(process.env.ARXIV_MAX_RESULTS || 100);
 const REQUEST_TIMEOUT_MS = Number(process.env.ARXIV_REQUEST_TIMEOUT_MS || 20000);
+const WINDOW_OVERLAP_MS = Number(process.env.ARXIV_WINDOW_OVERLAP_HOURS || 2) * 60 * 60 * 1000;
 const DATA_DIR = new URL("../public/data/", import.meta.url);
 
 const parser = new XMLParser({
@@ -38,8 +39,29 @@ function normalizeText(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
 }
 
-function datePart(value) {
-  return String(value || "").slice(0, 10);
+function compactUtcDate(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    throw new Error(`Invalid date for arXiv submittedDate range: ${value}`);
+  }
+  return [
+    date.getUTCFullYear(),
+    String(date.getUTCMonth() + 1).padStart(2, "0"),
+    String(date.getUTCDate()).padStart(2, "0"),
+    String(date.getUTCHours()).padStart(2, "0"),
+    String(date.getUTCMinutes()).padStart(2, "0")
+  ].join("");
+}
+
+function addSubmittedDateRange(query, windowStart, windowEnd) {
+  const start = compactUtcDate(windowStart);
+  const end = compactUtcDate(windowEnd);
+  return `(${query}) AND submittedDate:[${start} TO ${end}]`;
+}
+
+function isWithinWindow(value, windowStart, windowEnd) {
+  const time = new Date(value).getTime();
+  return time > new Date(windowStart).getTime() && time <= new Date(windowEnd).getTime();
 }
 
 function buildUrl(query) {
@@ -106,14 +128,36 @@ async function fetchQuery(query) {
   }
 }
 
-async function loadHistoricalPaperIds(currentDate) {
+async function loadExistingPayload(date) {
+  try {
+    return JSON.parse(await readFile(new URL(`${date}.json`, DATA_DIR), "utf8"));
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw error;
+  }
+}
+
+async function loadLatestSuccessfulRun() {
+  try {
+    const latest = JSON.parse(await readFile(new URL("latest.json", DATA_DIR), "utf8"));
+    return latest.generatedAt || latest.date;
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw error;
+  }
+}
+
+function withOverlap(value) {
+  return new Date(new Date(value).getTime() - WINDOW_OVERLAP_MS).toISOString();
+}
+
+async function loadHistoricalPaperIds() {
   await mkdir(DATA_DIR, { recursive: true });
 
   const knownByTopic = new Map(TOPICS.map((topic) => [topic.id, new Set()]));
   const files = await readdir(DATA_DIR).catch(() => []);
   const datedFiles = files
-    .filter((file) => /^\d{4}-\d{2}-\d{2}\.json$/.test(file))
-    .filter((file) => file !== `${currentDate}.json`);
+    .filter((file) => /^\d{4}-\d{2}-\d{2}\.json$/.test(file));
 
   for (const file of datedFiles) {
     const payload = JSON.parse(await readFile(new URL(file, DATA_DIR), "utf8"));
@@ -129,16 +173,16 @@ async function loadHistoricalPaperIds(currentDate) {
   return knownByTopic;
 }
 
-async function fetchTopic(topic, historicalIds, targetDate) {
+async function fetchTopic(topic, historicalIds, windowStart, windowEnd) {
   const seen = new Set();
   const papers = [];
   const errors = [];
 
   for (const query of topic.queries) {
     try {
-      const queryPapers = await fetchQuery(query);
+      const queryPapers = await fetchQuery(addSubmittedDateRange(query, windowStart, windowEnd));
       for (const paper of queryPapers) {
-        if (datePart(paper.published) === targetDate && !historicalIds.has(paper.id) && !seen.has(paper.id)) {
+        if (isWithinWindow(paper.published, windowStart, windowEnd) && !historicalIds.has(paper.id) && !seen.has(paper.id)) {
           seen.add(paper.id);
           papers.push(paper);
         }
@@ -153,15 +197,37 @@ async function fetchTopic(topic, historicalIds, targetDate) {
   return { ...topic, papers, errors };
 }
 
+function mergeWithExistingTopics(existingPayload, fetchedTopics) {
+  const existingByTopic = new Map((existingPayload?.topics || []).map((topic) => [topic.id, topic.papers || []]));
+
+  return fetchedTopics.map(({ errors, queries, ...topic }) => {
+    const seen = new Set();
+    const papers = [];
+    for (const paper of [...(existingByTopic.get(topic.id) || []), ...topic.papers]) {
+      if (!seen.has(paper.id)) {
+        seen.add(paper.id);
+        papers.push(paper);
+      }
+    }
+    papers.sort((a, b) => new Date(b.published) - new Date(a.published));
+    return { ...topic, papers };
+  });
+}
+
 async function main() {
   const date = process.env.ARXIV_DATE || todayInShanghai();
+  const windowEnd = process.env.ARXIV_WINDOW_END || new Date().toISOString();
+  const lastSuccessfulRun = await loadLatestSuccessfulRun();
+  const windowStart = process.env.ARXIV_WINDOW_START
+    || (lastSuccessfulRun ? withOverlap(lastSuccessfulRun) : new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
   const topics = [];
-  const startedAt = new Date().toISOString();
-  const historicalIdsByTopic = await loadHistoricalPaperIds(date);
+  const startedAt = windowEnd;
+  const existingPayload = await loadExistingPayload(date);
+  const historicalIdsByTopic = await loadHistoricalPaperIds();
 
   for (const topic of TOPICS) {
     console.log(`Fetching ${topic.name}`);
-    topics.push(await fetchTopic(topic, historicalIdsByTopic.get(topic.id) || new Set(), date));
+    topics.push(await fetchTopic(topic, historicalIdsByTopic.get(topic.id) || new Set(), windowStart, windowEnd));
   }
 
   const failedQueries = topics.flatMap((topic) => topic.errors.map((error) => ({
@@ -182,9 +248,11 @@ async function main() {
     startedAt,
     source: "arXiv API",
     maxResultsPerQuery: MAX_RESULTS,
-    mode: "daily-submitted-incremental",
+    mode: "rolling-window-incremental",
+    windowStart,
+    windowEnd,
     historicalPaperCount: [...historicalIdsByTopic.values()].reduce((sum, ids) => sum + ids.size, 0),
-    topics: topics.map(({ errors, queries, ...topic }) => topic)
+    topics: mergeWithExistingTopics(existingPayload, topics)
   };
 
   await mkdir(DATA_DIR, { recursive: true });
