@@ -2,6 +2,13 @@
   "schemaVersion": 1,
   "dates": [
     {
+      "date": "2026-07-25",
+      "generatedAt": "2026-07-25T03:46:03.376Z",
+      "topicCount": 8,
+      "paperCount": 0,
+      "path": "/data/2026-07-25.json"
+    },
+    {
       "date": "2026-07-24",
       "generatedAt": "2026-07-24T03:52:11.121Z",
       "topicCount": 8,
