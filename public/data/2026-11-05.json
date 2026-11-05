@@ -1,0 +1,682 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "generatedAt": "2026-11-05T07:06:58.469Z",
+  "startedAt": "2026-11-05T07:06:01.237Z",
+  "source": "arXiv API",
+  "maxResultsPerQuery": 100,
+  "mode": "rolling-window-incremental",
+  "windowStart": "2026-11-04T04:47:20.056Z",
+  "windowEnd": "2026-11-05T07:06:01.237Z",
+  "historicalPaperCount": 5210,
+  "topics": [
+    {
+      "id": "multimodal-llm-distillation",
+      "name": "多模态大语言模型蒸馏",
+      "papers": []
+    },
+    {
+      "id": "diffusion-models",
+      "name": "扩散模型",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.06796v1",
+          "title": "VA-TDM: A Unified View for Improving Few-Step Diffusion Models by Velocity Adversarial Distillation",
+          "summary": "Few-step distillation offers efficient generation with diffusion and flow models, but preserving quality with only a few sampling steps remains challenging. Distribution-matching methods via score distillation provide a strong foundation, yet they rely on accurately tracking the student's changing distribution. At intermediate generation steps in few-step sampling, student-score estimation can be difficult, and commonly used estimators may describe a different distribution from the one used to update the student. Flow matching allows a more flexible approach to supervision through velocity fields constructed from the student's sampling process. Building on this perspective, we introduce Velocity Adversarial Distillation (VAD), which uses a learned critic to compare student and teacher fields and turn their disagreement into feedback for learning. VAD unifies score distillation, Fisher-based matching, and moment matching, also explaining existing heuristic MMD updates and delivering new training objectives. We further develop VA-TDM, which follows trajectory distribution matching: providing supervision for partial denoising along the student trajectory. Beyond this, VA-TDM combines transition-aware online velocity learning and dual-form VAD supervision across intermediate student transitions. Extensive results show that VA-TDM is powerful for learning few-step generators, achieving state-of-the-art four-step performance in both text-to-image and text-to-video generation across various backbones and scaling effectively to 33B MiniMax-H3. In particular, our VA-TDM-H3 notably outperforms the few-step Fast-H3 and is closer to the original many-step H3 according to human preference.",
+          "published": "2026-11-04T17:14:20Z",
+          "updated": "2026-11-04T17:14:20Z",
+          "authors": [
+            "Yihong Luo",
+            "Tianyu Pang",
+            "Tianyang Hu"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06796v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06748v1",
+          "title": "EvoWorld: Towards Out-of-Sight World Evolution in Generative Video Models",
+          "summary": "Generative video models are increasingly used as visual world simulators, yet their primary strength lies in rendering plausible pixels rather than reasoning about how a world should evolve. Coherent world evolution requires more than visual fidelity: when an event occurs, a model must infer its consequences for the entities in the world and then render the resulting state. For example, after a wild beast appears, the model should not only depict the wild beast, but also infer whether a nearby person should flee, take cover, or fight back based on the realized scene. Existing diffusion-based video models lack an explicit mechanism for maintaining world state and reasoning over such event-conditioned consequences, often producing visually plausible but behaviorally static or causally inconsistent outputs. To make this reasoning gap concrete and measurable, we propose a new problem, Out-of-Sight Causal Evolution, which requires a model to render an event, reason about its consequences for the evolving world state, and reveal a causally plausible outcome as the world continues to evolve, even out of sight. As a baseline reference solution, we introduce EvoWorld, a brain-renderer collaboration framework in which a vision-language model serves as the world brain: it observes generated segments, maintains an evolving account of the world, and reasons about plausible state transitions, while a segment-autoregressive video renderer realizes them visually. We further introduce EvoWorld-Data and EvoWorld-Bench for training and evaluating event realization, causal reactions, and revisit consistency. Experiments show that EvoWorld substantially improves event-conditioned causal evolution over recent models while preserving visual quality and consistency, establishing a reference point for reasoning-guided, autonomous world evolution beyond the current field of view.",
+          "published": "2026-11-04T16:26:45Z",
+          "updated": "2026-11-04T16:26:45Z",
+          "authors": [
+            "Yequan Bie",
+            "Dengyang Jiang",
+            "Zhixuan Chen",
+            "Xiaozhuan Liang",
+            "Haoxuan Che",
+            "Quande Liu",
+            "Xi Chen",
+            "Hao Chen"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06748v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06652v1",
+          "title": "Dynamical State-Space Diffusion for Spatiotemporal Prediction",
+          "summary": "Diffusion models for temporal prediction typically corrupt each future frame with independent noise, leaving temporal dependence entirely to the denoiser. We propose Dynamical State-Space Diffusion (DSSD), which learns the temporal structure of the corruption process itself. DSSD builds a temporal kernel from the damped oscillatory modes of a stable diagonal state-space model, whose learned decay rates and frequencies let the corruption capture multiple timescales and oscillatory correlations, while the denoiser architecture remains unchanged. Running this model on a finite clip, however, requires the state before the first frame, which is unobserved; starting from a zero state leaves the early frames with less noise than the diffusion schedule prescribes. We avoid this by using the Cholesky factor of the model's stationary covariance as the temporal operator. We prove that this operator is causal, exactly invertible, keeps each frame's noise variance equal to that of standard diffusion, and reduces to the identity at the clean end of the process, and that it is exactly the Kalman innovations form of the state-space model. The denoiser is trained to predict the temporally correlated noise, and sampling removes and reapplies the temporal mixing at each step. On scientific-field and robot-video datasets, DSSD outperforms diffusion baselines that share its denoiser, and the evolution of its learned modes during training shows that the temporal operator adapts to each dataset.",
+          "published": "2026-11-04T15:29:17Z",
+          "updated": "2026-11-04T15:29:17Z",
+          "authors": [
+            "Woojun Lee",
+            "Hankyeol Kim",
+            "Pilsung Kang"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06652v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06556v1",
+          "title": "LungMend: A Healthy-Only Latent Diffusion Shape Prior for Lung Mask Correction in Severe Tuberculosis CT",
+          "summary": "Lung segmentation models such as R231 are widely used, but they fail on severe tuberculosis (TB) CT: cavities and consolidations look like non-lung tissue and are left out of the mask. We present LungMend, a post-processing model that corrects such masks using only healthy anatomy. A latent diffusion model, trained on healthy lungs with synthetically corrupted masks, learns to recover the complete lung from the faulty mask and the bone anatomy, without any pathological data or CT intensities. LungMend recovers cavities and consolidations that R231 misses and improves accuracy on expert-annotated slices. Code: https://github.com/noureddinekhiati/LungMend",
+          "published": "2026-11-04T14:18:43Z",
+          "updated": "2026-11-04T14:18:43Z",
+          "authors": [
+            "Rezkellah Noureddine Khiat",
+            "Pierre-Yves Brillet",
+            "Catalin Fetita"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06556v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06540v1",
+          "title": "Spatially and Compositionally Controlled Multimodal Glioblastoma MRI Synthesis with Latent Diffusion",
+          "summary": "Glioblastoma exhibits substantial heterogeneity in tumour morphology and composition across MRI modalities, often making available clinical datasets highly unbalanced in terms of patient pathologies. We propose a two-stage latent diffusion model (LDM) framework for the generation of explicitly controllable 2D glioblastoma MRI scans. First, a segmentation LDM generates tumour maps conditioned on location, spatial extent, axial position, and subregion composition. Second, a modality-conditioned LDM with ControlNet generates T1, T1Gd, T2, and FLAIR images adhering to the requested segmentation. On a held-out test set, generated segmentations achieved a mean centroid error of 0.842 pixels and a subregion proportion error of 0.795 percentage points. ControlNet improved Fréchet inception distance (FID) across all four modalities, reducing pooled FID from 42.59 to 36.12. An expert reader study yielded mean quality ratings of 6.60 for real images, 6.83 for ControlNet-generated images, and 6.77 for fully synthetic images.",
+          "published": "2026-11-04T14:10:29Z",
+          "updated": "2026-11-04T14:10:29Z",
+          "authors": [
+            "Steven Glass",
+            "Max Van Puyvelde",
+            "Marija Pizurica",
+            "Mia Meyer",
+            "Olivier Gevaert",
+            "Willie Brink"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06540v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06471v1",
+          "title": "A 3D foundation model unifying CT interpretation and segmentation",
+          "summary": "Radiologists interpret computed tomography (CT) scans by jointly determining what a finding represents and where it lies in three-dimensional (3D) anatomy. However, CT models have treated CT interpretation and 3D segmentation as separate tasks, leaving textual findings spatially unverifiable and overlooking potential synergy between clinical understanding and spatial perception. Here we present HoloCT, a generalist 3D foundation model unifying CT interpretation and voxel-level segmentation by jointly modelling whole-volume context and fine-grained anatomical detail, providing 3D masks as evidence. We curated HoloDATA, comprising 195,921 CT scans from 73 public datasets and six clinical cohorts, with 6.2 million instruction dialogues and 2.8 million CT-mask pairs. Across 346 tasks spanning segmentation, lesion screening, visual question answering, and report generation on 61 internal and 12 external datasets, HoloCT outperformed specialist and foundation models. In multicentre validation across 11,455 clinical CT scans from five hospitals, HoloCT outperformed competing models in lesion segmentation and report generation by 18.2 and 15.3 points. It also achieved 85.1% mean accuracy in screening thyroid tumours and colon lesions, exceeding all four participating radiologists in a retrospective reader study. Further analyses revealed bidirectional semantic-spatial synergy: language-guided segmentation delineated unseen anatomical structures and lesions as well as diffuse free-text findings, outperforming the leading approach by 22.1 points, whereas prompting the model to generate corresponding 3D masks alongside its textual outputs significantly improved interpretation performance. HoloCT shows that clinical understanding and spatial perception can be learned together within a single foundation model and offers a path towards more accurate and reliable CT analysis.",
+          "published": "2026-11-04T13:07:27Z",
+          "updated": "2026-11-04T13:07:27Z",
+          "authors": [
+            "Yulu Xie",
+            "Zilong Li",
+            "Shen Xu",
+            "Yifan Bai",
+            "Liuhong Shi",
+            "Jiao Chen",
+            "Xianglei Kong",
+            "Wenchao Zhu",
+            "Na Shen",
+            "Xianghua Ye",
+            "Yang Yan",
+            "Jiaju Zheng",
+            "Yunsong Peng",
+            "Yanzhou Su",
+            "Chaohui Yu",
+            "Hao Luo",
+            "Fan Wang"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06471v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06425v1",
+          "title": "D3D: Decoupled Diffusion Drafting for Asynchronous Speculative Decoding",
+          "summary": "Target-conditioned diffusion drafters predict candidate tokens in parallel, yet each new block must wait for updated target-model hidden states. This forces drafting and verification to run sequentially, limiting speedup even though each block is generated in one pass. We introduce D3D, a standalone diffusion drafter that removes this inter-round dependency. D3D combines blockwise denoising with auxiliary autoregressive supervision to achieve long accepted prefixes without target hidden states. This independence lets D3D draft successor blocks during verification in one packed pass, enabling asynchronous speculative decoding. We progressively prune layers according to their effect on acceptance length to reduce the cost of packed drafting. Removing five of 36 layers retains over 99\\% of mean acceptance length across three benchmarks with Qwen3-8B as the target. Across seven benchmarks, D3D averages 5.00$\\times$ and 5.71$\\times$ decoding speedup with Qwen3-8B and Qwen3-32B targets, compared with 4.03$\\times$ and 3.67$\\times$ for DFlash. On GSM8K with Qwen3-32B, speedup reaches 7.48$\\times$. Code is publicly available at https://github.com/fudan-generative-vision/D3D.",
+          "published": "2026-11-04T12:27:58Z",
+          "updated": "2026-11-04T12:27:58Z",
+          "authors": [
+            "Baoyou Chen",
+            "Ruiqiao Mei",
+            "Guancong Lin",
+            "Tao Song",
+            "Weihao Yuan",
+            "Qun Liu",
+            "Siyu Zhu"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06425v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06280v1",
+          "title": "DyPSI: Dynamic Physics Sensing via Joint Field and Sensor-Trajectory Generation",
+          "summary": "Physics sensing in evolving environments requires reconstructing dense spatiotemporal fields from sparse observations while adapting where future observations should be collected. Existing reconstruction and sensor-placement methods have made substantial progress, but they typically rely on static sensing assumptions: they either use a single layout across all frames or optimize placements independently at each frame, which limits their ability to produce temporally coherent sensing trajectories. We introduce DyPSI, a dynamic physics sensing framework that formulates this problem as the joint generation of future fields and sensor trajectories conditioned on historical observations. DyPSI lifts discrete sensor coordinates into continuous Sensor Position Fields, encodes fields and sensing configurations with a shared Functional Tucker representation, and trains a joint diffusion model to generate future fields and sensing trajectories simultaneously in the resulting latent space. A Gaussian-process temporal kernel correlates the perturbation injected during diffusion training, biasing the denoiser toward temporally smooth recoveries, and we further provide an analysis linking the EDM training objective to a sequence-aggregated A-optimality criterion and a kernel-induced bound on discrete trajectory variation. Experiments on turbulent flow, GLORYS12 sea-surface temperature, and 3D car aerodynamics show that DyPSI consistently outperforms static and frame-wise placement strategies, with substantial error reduction under tight sensor budgets. The code is available at https://github.com/mengqi132/DyPSI.",
+          "published": "2026-11-04T10:21:43Z",
+          "updated": "2026-11-04T10:21:43Z",
+          "authors": [
+            "Yizhou Zhang",
+            "Panqi Chen",
+            "Lei Cheng",
+            "Ting Zhang",
+            "Jianlong Li",
+            "Jianfeng Shi",
+            "Shikai Fang"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06280v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06265v1",
+          "title": "Learning Pseudo-Riemannian Manifolds for Heterophilic Graphs via Graph Signature",
+          "summary": "Several widely used families of Graph Neural Networks carry a positive-definite geometric prior. Graph convolution read as heat diffusion needs a positive semi-definite operator, hyperbolic models place features on positive-definite Riemannian manifolds, and dot-product and GAT-style attention scores use positive-definite inner products. On heterophilic graphs, where edges often signify dissimilarity or structural repulsion, that prior is a mismatch: no positive-definite form can assign a negative squared distance to a direction the labels separate. To measure the mismatch, we introduce the Graph Signature Index ($s_{\\mathcal{G}}$), the inertia of a class-compatibility matrix built from label topology alone, and we prove that no value of the edge or node homophily index in $(0,1)$ rules out a negative eigenvalue. We then propose the Pseudo-Riemannian Attention Network (PRAT), whose attention logit is a signed squared pseudo-distance under a learnable diagonal metric initialized from $s_{\\mathcal{G}}$. The design is diagnose-then-learn: the signature supplies a sign structure that unconstrained training keeps outside near-zero directions, and the projection learns the rest of the metric around it. Across fifteen node-classification benchmarks PRAT outperforms or matches the strongest heterophily-adapted models. A controlled ablation ties that performance to the sign structure itself: with architecture and protocol fixed, forbidding the metric to be indefinite costs accuracy on the graphs $s_{\\mathcal{G}}$ marks as indefinite and leaves the others unchanged.",
+          "published": "2026-11-04T10:14:42Z",
+          "updated": "2026-11-04T10:14:42Z",
+          "authors": [
+            "Yun Young Choi",
+            "Asung Kil",
+            "Sun Woo Park",
+            "Minho Lee",
+            "Seokhwan Kim"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06265v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06255v1",
+          "title": "Learning Noise Optimization for Reward Alignment in Few-Step Generative Models",
+          "summary": "Reward alignment for diffusion- and flow-based generative models is often formulated over stochastic trajectories, making it less suitable for few-step deterministic generators. Initial noise optimization provides a trajectory-free alternative, but existing gradient-free methods require costly per-sample search at inference. We introduce LeNO (Learning Noise Optimization), which amortizes reward-guided initial noise optimization into a learned residual transport while keeping the pretrained generator frozen. LeNO learns an anchor-conditioned distribution over noise corrections using Local GRPO and scalar rewards, eliminating iterative test-time optimization. For Gaussian initial noise with norm-preserving projection, we derive a tractable upper bound on the KL divergence between the corrected noise distribution and the original prior, providing a principled regularization objective. We evaluate LeNO on few-step text-to-image and protein structure generation, including expensive black-box designability rewards. Across both domains, LeNO improves target rewards with a single noise correction at inference while largely preserving generation quality and diversity.",
+          "published": "2026-11-04T10:06:32Z",
+          "updated": "2026-11-04T10:06:32Z",
+          "authors": [
+            "Hongeun Kim",
+            "Jeongsol Kim",
+            "Jong Chul Ye"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06255v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06166v1",
+          "title": "FaCoDiff: Factor-Correlated Diffusion for Multivariate Probabilistic Forecasting",
+          "summary": "Multivariate probabilistic forecasting requires modeling cross-variable dependence alongside marginal uncertainty. The challenge is to learn this dependence while controlling marginal noise scales and avoiding dense covariance costs. We propose Factor-Correlated Diffusion (FaCoDiff), which couples a compact conditional statistical estimator with structured denoising. History-conditioned factor loadings use distinct coefficients for forecast-center correction, scale adjustment and noise dependence. Diagonal compensation preserves the estimated marginal noise variances, while low-rank operators enable residual Gaussian likelihood evaluation and noise transport without dense covariance storage or factorization. Factor-derived feature modulation explicitly conditions the denoiser, and a geometry-aware objective accounts for errors after noise transport. The same conditional geometry governs forward perturbations and reverse sampling. Across nine datasets, FaCoDiff achieves the lowest mean variogram score on eight datasets and ranks among the top two on 43 of 54 dataset-metric combinations in the reported comparisons. Matched ablations on Solar and Weather show that factor covariance improves mean Energy and Variogram scores under all four combinations of center and scale correction. Disrupting cross-variable sample pairings while preserving marginal trajectories worsens joint and aggregate scores on both datasets, demonstrating the predictive value of generated cross-variable dependence.",
+          "published": "2026-11-04T08:47:35Z",
+          "updated": "2026-11-04T08:47:35Z",
+          "authors": [
+            "Jiaxuan Li",
+            "Yao Liu",
+            "Yuewei Xue",
+            "Shijie Dong",
+            "Zixiang Jin",
+            "Xiaoyu Guo",
+            "Qiao Liu"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06166v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06157v1",
+          "title": "Neural Stochastic Forecasting for Lateral Molecular Diffusion Simulations",
+          "summary": "Predicting the long-time diffusion of membrane proteins is challenging because molecular dynamics (MD) simulations are computationally expensive, while experimental single-particle tracking is often limited by finite observation times. Here, we introduce a neural stochastic (NS) model for forecasting the collective diffusion of membrane proteins from coarse-grained MD trajectories. The model combines a transformer-based representation of protein configurations, recurrent networks operating at multiple temporal scales, and a stochastic latent process with learned memory. A cross-attention decoder then generates correlated protein displacements while accounting for the instantaneous system geometry and periodic boundary conditions. We evaluate the model in two membrane systems: seven interacting PIEZO channels and a mixed system containing seven PIEZO and ten TREK channels. For the seven PIEZO system, the NS model reproduces the anomalous diffusion exponent measured in MD simulations $α\\sim 1$, substantially improving on a previously developed variational autoregressive model that exhibits superdiffusive behavior. The model also generates trajectories extending to 40,000 frames and captures the distinct diffusion characteristics of PIEZO and TREK populations in the mixed system. Comparisons of time-averaged mean-square displacements, Van Hove displacement distributions, and non-Gaussian parameters show that the model preserves key statistical features of the simulated dynamics. These results establish neural stochastic modeling as a promising approach for generating long trajectories of multi-protein membrane diffusion and extending the statistical analysis of molecular dynamics simulations.",
+          "published": "2026-11-04T08:38:11Z",
+          "updated": "2026-11-04T08:38:11Z",
+          "authors": [
+            "Jacob Ede Levine",
+            "Mario Hidalgo-Soria",
+            "Chen Yun Wen",
+            "Yun Lyna Luo",
+            "Sai Chandra Kosaraju"
+          ],
+          "categories": [
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06157v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06000v1",
+          "title": "Intra-Architecture Source Attribution for Stable Diffusion: A New Task with Benchmark Dataset and Baseline",
+          "summary": "Designing systems that attribute a generated image to its source model has lately become a major area of AI research. Most existing datasets and systems related to image source attribution are targeted towards the detection of architectural signatures of the source models. Distinct from this, focusing on stable diffusion, we introduce a novel task, IntrAA-SD, Intra-Architecture source Attribution for Stable Diffusion, where the source models to be differentiated share the same architectural backbone and differ only due to fine-tuning. The proposed task aligns with the emergence of fine-tuned generators having the same architecture, like Juggernaut XL and RealVis XL, which are fine-tuned versions of Stable Diffusion XL (SDXL). We provide a first-of-its-kind $140$K-image benchmark dataset containing images generated from different fine-tunes of SDXL, along with in-domain and out-of-distribution prompts. We also provide a baseline framework for IntrAA-SD, which leverages a style-conditioned Mixture-of-Experts network. It uses a frozen CLIP backbone to capture the image style and gate the MoE, which processes fine-tuned trace features from a high-resolution LoRA-adapted DINOv2 network. The fine-tuned models used, the prompting strategies considered, and the formation details employed in the novel dataset are elaborated. Our baseline intra-architecture source attribution method is evaluated in terms of attribution accuracy on our dataset, and ablation studies are also performed. Code and dataset is available at https://github.com/mallikagarg/IntrAA-SD.",
+          "published": "2026-11-04T05:47:50Z",
+          "updated": "2026-11-04T05:47:50Z",
+          "authors": [
+            "Ashutosh Dayal",
+            "Mallika Garg",
+            "Debashis Sen"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06000v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.05974v1",
+          "title": "PathoS2VD: From 2D Histopathology to Pseudo Z-Stack Representations",
+          "summary": "For decades, diagnostic pathology has relied on thin two-dimensional (2D) tissue sections, despite biological tissues exhibiting inherently three-dimensional (3D) morphological organization. Because a single section captures only one focal plane, important morphological cues along the z-axis are inevitably discarded, limiting tissue representation for both human interpretation and computational analysis. In this work, we propose a generative framework that learns z-axis morphological priors from pathology z-stack data, offering a cost-effective alternative to dedicated volumetric imaging, and transfers this knowledge to conventional single-plane histopathology. Specifically, an image-to-video (I2V) latent diffusion model (LDM) is trained to synthesize a pseudo z-stack from a single 2D image, capturing plausible morphological variations across adjacent focal planes rather than reconstructing physical tissue volumes. To enable deployment on large-scale clinical datasets without native z-stack acquisition, we further introduce a prior-preserving mixture fine-tuning strategy that adapts the model to new domains while retaining the learned z-axis morphological prior. Extensive experiments demonstrate that the synthesized pseudo z-stacks exhibit realistic cross-plane morphological continuity and consistently improve downstream prostate cancer classification compared with conventional 2D representations. Our results suggest that learning transferable z-axis priors from limited z-stack data provides a practical way to enrich routine pathology images with complementary morphological information. Code: https://github.com/QuIIL/PathoS2VD.",
+          "published": "2026-11-04T05:07:58Z",
+          "updated": "2026-11-04T05:07:58Z",
+          "authors": [
+            "Jiamu Wang",
+            "Keunho Byeon",
+            "Ji-Uk Kim",
+            "Jin Tae Kwak",
+            "Heounjeong Go"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.05974v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.05969v1",
+          "title": "CLEAR: Color-Texture Latent Alignment for Single Image Reflection Removal",
+          "summary": "Single Image Reflection Removal (SIRR) seeks to recover the transmitted scene from a photograph captured through glass. Recent latent restoration methods use pretrained generative priors, but many recover detail by feeding high-frequency features from the degraded input back into the decoder. This works for degradations such as blur, noise, or haze, where input detail mostly belongs to the scene. It is less suitable for SIRR, where reflections add a second structured layer: directly reusing the input's skip connections can sharpen the image while also bringing reflection edges back. Latent compression also introduces color drift and fine-detail loss. We propose CLEAR (Color-Texture LatEnt Alignment for Single Image Reflection Removal), a deterministic, single-timestep, non-iterative latent framework that uses a pretrained latent diffusion backbone as a natural-image prior. A physics-guided separator organizes the prediction around the transmission, reflection, and residue formation model and outputs coarse layer latents in one forward pass. The Hybrid Feature Alignment Module (HFAM) then treats input-derived skips as contaminated layer-mixture features. It rectifies their high-frequency content with a clean-transmission-aligned color query, learned from the input features themselves under ground-truth feature supervision, keeping transmission-consistent texture while attenuating reflection-colored detail. CLEAR achieves the best average across fidelity and perceptual metrics on six real-world benchmarks and the lowest LPIPS on every dataset, with the largest gains on the hardest benchmarks.",
+          "published": "2026-11-04T05:03:51Z",
+          "updated": "2026-11-04T05:03:51Z",
+          "authors": [
+            "Tu Vo",
+            "Sheir A. Zaheer",
+            "Chan Y. Park"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.GR"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.05969v1"
+        }
+      ]
+    },
+    {
+      "id": "test-time-adaptation",
+      "name": "测试时领域自适应",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.06612v1",
+          "title": "From Reconstruction to Imputation: Test-Time Optimization for Missing Time-Series Channels",
+          "summary": "Complete sensor-channel failures create a difficult form of time-series missingness: local interpolation is unavailable, and deploying a separately trained imputer for every failure pattern may be impractical. We ask whether a sequence reconstructor trained without artificial mask augmentation and then frozen can be converted into an imputer at inference time. Our method treats the missing entries of each test window as optimization variables, clamps all observations, and backpropagates through the frozen model to minimize reconstruction error only on observed coordinates. The resulting observed-self-consistency objective requires neither artificial mask augmentation nor full-channel dropout during reconstructor training. We characterize when this refinement is informative through the cross-Jacobian from missing inputs to observed residuals, and use an optional temporal-smoothness prior when that coupling is weak. Across five real-world datasets with exactly one channel synthetically masked per test window and four reconstruction architectures, no-prior test-time refinement reduces MAE relative to one-pass reconstruction in 19 of 20 dataset-backbone combinations. Compared with mask-aware imputers trained under either standard structured masks or matched full-channel dropout, the best refined reconstructor achieves the lowest MAE on two datasets and trails the strongest baseline on three. These gains require substantially more inference time and are sensitive to cross-channel coupling. Our results establish test-time self-consistency as a conditional inference-time adapter for frozen reconstruction models that complements mask-aware imputation without retraining the reconstructor.",
+          "published": "2026-11-04T14:59:22Z",
+          "updated": "2026-11-04T14:59:22Z",
+          "authors": [
+            "Björn Ludwig",
+            "Alexander Windmann",
+            "René Heesch",
+            "Oliver Niggemann"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06612v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06593v1",
+          "title": "BudgetSplat: Budget-Controllable Generalizable Gaussian Splatting",
+          "summary": "Feed-forward 3D Gaussian Splatting enables efficient generalizable novel view synthesis, but existing pixel-aligned methods often generate highly redundant Gaussian primitives, causing the final representation size and rendering cost to grow rapidly with image resolution and the number of input views. We propose BudgetSplat, a budget-controllable feed-forward framework that adapts the final Gaussian representation to a user-specified preservation ratio. Rather than treating compaction as simple importance ranking, we formulate it as a joint problem of importance estimation, spatial coverage, and cross-view redundancy. A single trained model supports varying numbers of context views and multiple test-time budgets without per-budget retraining or per-scene compression. To realize this formulation, Intra-Cross Mask Supervision provides structure-, coverage-, and redundancy-aware guidance for learning Gaussian importance, while budget-conditioned feature modulation adapts Gaussian opacity and attributes to the requested preservation ratio. Coverage-Aware Budget Selection further combines patch-wise pre-selection, view-wise opacity ranking, and 3D redundancy suppression to construct compact yet spatially distributed Gaussian representations. Experiments on indoor reconstruction and cross-dataset generalization demonstrate consistent quality--size trade-offs across different input view counts and preservation ratios, substantially reducing final representation storage and rendering cost while preserving rendering quality.",
+          "published": "2026-11-04T14:46:59Z",
+          "updated": "2026-11-04T14:46:59Z",
+          "authors": [
+            "Yuxi Hu",
+            "Jun Zhang",
+            "Wei Mao",
+            "Yuchen Rao",
+            "Friedrich Fraundorfer"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06593v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06546v1",
+          "title": "Adapting Sleep Foundation Models for Dense Sleep Spindle Localization",
+          "summary": "Adapting sleep foundation models to dense electroencephalography (EEG) event localization is challenging because multi-second representations may not preserve sufficient temporal detail for precise boundary recovery. We address sleep spindle localization by adapting a frozen SleepFM encoder with a local time-frequency pathway that preserves spindle-relevant spectral content and intra-token position. The local representation drives localization, while residual cross-attention incorporates SleepFM temporal context. Dense predictions are obtained through localized token-to-sample reconstruction and temporal refinement. Tested on the Massive Online Data Annotation (MODA), the proposed model achieves an event-level $F_1$ of $0.8080 \\pm 0.0040$ at IoU 0.2 across six folds. Ablations show that localization primarily depends on local spectral and sub-token temporal information, while the pretrained representation provides complementary context. These results indicate that dense adaptation benefits from preserving information below the pretrained token scale. Code will be released upon acceptance.",
+          "published": "2026-11-04T14:12:33Z",
+          "updated": "2026-11-04T14:12:33Z",
+          "authors": [
+            "Alexis Bollengier",
+            "Abel Díaz Berenguer",
+            "Olivier Pallanca",
+            "André Anjos",
+            "Hichem Sahli"
+          ],
+          "categories": [
+            "eess.SP",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06546v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06530v1",
+          "title": "Online Control of the Family-wise Error Rate (FWER) for Multi-stage Platform Trials",
+          "summary": "In platform trials, multiple intervention arms can enter or leave the study at any time, which brings the challenge of how to control the type I error rate. Online testing procedures, where a stream of hypotheses are tested over time and the total number of hypotheses is unknown, might be a viable choice for error rate control in platform trials. Interim analyses in a multi-stage design offer the opportunity of early stopping for success or futility in clinical trials by testing the same hypothesis at different time points. Some methods targeting false-discovery rate (FDR) or family-wise error rate (FWER) control for multi-stage platform trials have been proposed. However, a method which controls the FWER and allows new arms to be added at any time without prior information is yet to be established. The ADDIS-Spending (ADaptive DIScarding Alpha-spending) procedure controls the FWER in an online setting. We propose the group sequential ADDIS-Spending algorithm to enable interim analyses for each hypothesis in platform trials. The developed method can update the error level of an individual hypothesis at all (interim) analyses whenever new decisions on other hypotheses are made. We compare alternative approaches with our method in a simulation study. The proposed method yields competitive results in the conducted simulations.",
+          "published": "2026-11-04T13:56:42Z",
+          "updated": "2026-11-04T13:56:42Z",
+          "authors": [
+            "Jiangyue Yao",
+            "David S. Robertson",
+            "Thomas Jaki"
+          ],
+          "categories": [
+            "stat.ME"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06530v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06458v1",
+          "title": "Generative Learning on Dynamic Text-Attributed Graphs",
+          "summary": "Dynamic text-attributed graphs capture evolving interactions among entities with rich textual information, but future-link prediction remains difficult when nodes have little interaction history or appear as new targets. We propose \\method, a generative framework that represents nodes with compact semantic identifiers (SIDs) learned from text and autoregressively predicts a target SID conditioned on the source SID, recent interaction events, and relative time gaps. A lightweight structural calibration further incorporates repetition, co-occurrence, and popularity. At inference time, \\method encodes each query context once and reuses SID likelihoods to rank prescribed candidates, providing a candidate-efficient prediction interface. Experiments on nine datasets show broadly competitive performance across domains and graph densities. Source-side inductive evaluations demonstrate that text-derived SIDs provide a useful representation when a test source has no observed interaction history, while two recommendation-oriented case studies evaluate controlled new-user adaptation and first-arrival ranking for inductive new items. Further analyses characterize SID uniqueness, capacity, and temporal stability. Overall, the results support combining text-derived SIDs with temporal histories for dynamic link prediction.",
+          "published": "2026-11-04T12:56:23Z",
+          "updated": "2026-11-04T12:56:23Z",
+          "authors": [
+            "Zhenyu Yang",
+            "Yuhong Chen",
+            "Binli Luo",
+            "Xiaodong Li",
+            "Xiaolin Hu",
+            "Hui Li",
+            "Jintang Li"
+          ],
+          "categories": [
+            "cs.SI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06458v1"
+        }
+      ]
+    },
+    {
+      "id": "automated-essay-scoring",
+      "name": "作文评分",
+      "papers": []
+    },
+    {
+      "id": "knowledge-tracing",
+      "name": "知识追踪",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.06760v1",
+          "title": "Route First, See Later: Enabling Vision Agents to Reason Scientifically by Separating Routing Policy from Action Spaces",
+          "summary": "Scientific image-analysis workflows require agents to select among diverse capabilities like description, detection, counting, and segmentation. Current multi-tool architectures conflate intent interpretation with visual execution, masking whether a failure arises from flawed reasoning (misrouting) or failed perception (invalid tool execution). This lack of auditability renders agents unreliable for high-stakes scientific automation. We introduce ZETA, an extensible architecture that operationalizes the decoupling of routing policy from action execution. ZETA resolves scientific intent before invoking specialized visual tools, treating measurement as a deterministic operation grounded in explicit geometry rather than generative output. This architecture exposes the \"black box\" of agent decision-making, allowing routing correctness and downstream execution to be evaluated as independent failure modes. To our knowledge, we provide the first controlled study in scientific vision-agent routing that isolates explicit routing-policy specification while holding the legal action interface fixed. Evaluation on a zero-shot benchmark of 51 scientific-intent queries shows that explicit routing semantics can substantially improve routing accuracy, particularly at semantically adjacent action boundaries, although improvements vary across models. For Qwen 3.8, explicit routing-policy specification improves segmentation routing accuracy from 6.2% to 75.0% and detection routing accuracy from 60.0% to 100%. ZETA's execution traces make routing decisions and downstream artifacts separately observable, providing a basis for distinguishing intent-selection errors from visual execution failures. ZETA establishes the necessary infrastructure to isolate execution errors from interpretive ones, a critical requirement for deploying reliable scientific vision agents.",
+          "published": "2026-11-04T16:39:17Z",
+          "updated": "2026-11-04T16:39:17Z",
+          "authors": [
+            "Shubhabrata Mukherjee",
+            "Jeffrey Donatelli",
+            "Daniela Ushizima"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06760v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06709v1",
+          "title": "Beyond the principle-practice gap: Responsible AI as situated epistemic and ethical practice",
+          "summary": "Responsible AI scholarship has found that ethical principles are frequently not reflected in AI design and development. Conceptualised as a `gap' between principle and practice, this is framed as a problem of implementation, awareness or compliance, and by implication, a deficit of systems or individual behaviour. This paper sets out an alternative explanation. Drawing on fourteen semi-structured interviews with actors designing and governing AI-enabled anti-trafficking systems across law enforcement, commercial, research, and survivor-support contexts, it argues that such apparent gaps emerge from the varied and complex institutional and professional conditions through which actors come to recognise some issues, but not others, as ethical problems requiring action. We show that epistemic choices are intertwined with ethical judgements, and trace four interconnected moments---perception, judgement, situated action and socio-technical materialisation---through which concerns become intelligible, are weighed and acted upon, and are embedded in technical artefacts and governance arrangements. Actors often hold genuine ethical commitments, but these commitments are shaped by institutional logics and professional moral economies: some concerns are materialised, while others are narrowed, deferred or left unrealised. We show that ethical agency is exercised within and between competing constraints of profession, role, prior experience, and institutional settings. The paper argues that responsible AI governance requires purposeful and well-developed epistemic infrastructures that can cut across these constraints to establish institutional conditions through which the knowledge of affected communities and potential harms becomes receivable and actionable in design.",
+          "published": "2026-11-04T16:08:17Z",
+          "updated": "2026-11-04T16:08:17Z",
+          "authors": [
+            "Thao Do Ngoc",
+            "Emma Carmel"
+          ],
+          "categories": [
+            "cs.CY",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06709v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.05989v1",
+          "title": "Look Before You Move: Multimodal Sensing-Aided Trajectory and Beamforming Design for 6DMA",
+          "summary": "Six-dimensional movable antenna (6DMA) technology allows a base station (BS) to adjust the three-dimensional (3D) positions and 3D rotations, i.e., the 6D poses, of its surfaces. Many existing 6DMA designs select the poses based on prior channel knowledge. However, the channels at a new pose can be estimated only after the surfaces have moved to this pose, and the limited movement speeds of the surfaces restrict the poses reachable at the next time step. To address these challenges, we propose a learning-based multimodal sensing-aided trajectory and beamforming design for multiuser 6DMA systems with mobile users and surrounding objects. The BS observes the users and surrounding objects with RGB images, LiDAR point clouds, and GPS positions, independently of the poses of the surfaces. Since a surface may need several time steps to reach a favorable pose, the BS designs a 6DMA trajectory over several future time steps and executes only its first step, following receding-horizon control. We propose a neural network, in which user-centric cross-modal attention and temporal self-attention modules relate each user to the scene and its sensing history, and surface-to-user attention relates each surface to the users. A projection layer keeps the poses feasible under the geometric and kinematic constraints, and a graph attention module allocates the transmit power along the pilot-based beamforming directions. Performance evaluations using the CARLA driving simulator and Sionna ray tracing (RT) demonstrate significant minimum-rate gains of the proposed design over fixed-position antennas. Ablation studies validate the contributions of multimodal sensing and the proposed attention modules to these gains. The results further highlight the importance of designing the trajectory several time steps ahead, which is more beneficial under tighter speed limits of the surfaces.",
+          "published": "2026-11-04T05:36:03Z",
+          "updated": "2026-11-04T05:36:03Z",
+          "authors": [
+            "Zeyu Hao",
+            "Wentao Yu",
+            "Lutz Lampe",
+            "Vincent W. S. Wong"
+          ],
+          "categories": [
+            "eess.SP"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.05989v1"
+        }
+      ]
+    },
+    {
+      "id": "prompt-learning",
+      "name": "提示学习",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.06471v1",
+          "title": "A 3D foundation model unifying CT interpretation and segmentation",
+          "summary": "Radiologists interpret computed tomography (CT) scans by jointly determining what a finding represents and where it lies in three-dimensional (3D) anatomy. However, CT models have treated CT interpretation and 3D segmentation as separate tasks, leaving textual findings spatially unverifiable and overlooking potential synergy between clinical understanding and spatial perception. Here we present HoloCT, a generalist 3D foundation model unifying CT interpretation and voxel-level segmentation by jointly modelling whole-volume context and fine-grained anatomical detail, providing 3D masks as evidence. We curated HoloDATA, comprising 195,921 CT scans from 73 public datasets and six clinical cohorts, with 6.2 million instruction dialogues and 2.8 million CT-mask pairs. Across 346 tasks spanning segmentation, lesion screening, visual question answering, and report generation on 61 internal and 12 external datasets, HoloCT outperformed specialist and foundation models. In multicentre validation across 11,455 clinical CT scans from five hospitals, HoloCT outperformed competing models in lesion segmentation and report generation by 18.2 and 15.3 points. It also achieved 85.1% mean accuracy in screening thyroid tumours and colon lesions, exceeding all four participating radiologists in a retrospective reader study. Further analyses revealed bidirectional semantic-spatial synergy: language-guided segmentation delineated unseen anatomical structures and lesions as well as diffuse free-text findings, outperforming the leading approach by 22.1 points, whereas prompting the model to generate corresponding 3D masks alongside its textual outputs significantly improved interpretation performance. HoloCT shows that clinical understanding and spatial perception can be learned together within a single foundation model and offers a path towards more accurate and reliable CT analysis.",
+          "published": "2026-11-04T13:07:27Z",
+          "updated": "2026-11-04T13:07:27Z",
+          "authors": [
+            "Yulu Xie",
+            "Zilong Li",
+            "Shen Xu",
+            "Yifan Bai",
+            "Liuhong Shi",
+            "Jiao Chen",
+            "Xianglei Kong",
+            "Wenchao Zhu",
+            "Na Shen",
+            "Xianghua Ye",
+            "Yang Yan",
+            "Jiaju Zheng",
+            "Yunsong Peng",
+            "Yanzhou Su",
+            "Chaohui Yu",
+            "Hao Luo",
+            "Fan Wang"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06471v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06395v1",
+          "title": "GIST: Gibbs-Targeted Hierarchical Data Selection for Offline RLVR",
+          "summary": "Offline reinforcement learning with verifiable rewards (RLVR) trains on a fixed pool of sampled responses and typically supervises every token of every response, although responses and tokens are not equally informative. We study which ones to supervise through the Gibbs-optimal policy of KL-regularized RLVR, which offline training targets, and measure the mismatch between a policy and this target with a bidirectional KL divergence. At the reference policy, this mismatch factorizes exactly and separates the two outcomes: correct responses contribute mainly through the forward term, concentrated on their low-probability tokens, and incorrect responses through the reverse term, concentrated on the responses the policy generates often and on their high-probability tokens. Based on this analysis, we propose GIST (Gibbs-Targeted Hierarchical Data Selection), a two-level selection method that approximates these principles with signals available before training. GIST uses the sampling temperature to select correct responses on-policy and incorrect responses near the policy's mode, and it uses the initial policy's token probabilities to supervise only the tokens where the mismatch lies. Applied to two offline training objectives, GIST raises the average accuracy over GSM8K, MATH-500, and MBPP for all three models under both objectives. In a controlled comparison on Qwen3-0.6B/GSM8K, it outperforms seven selection baselines that choose from the same candidates while supervising 66.6% fewer tokens than training on all candidates of the same prompts.",
+          "published": "2026-11-04T12:01:21Z",
+          "updated": "2026-11-04T12:01:21Z",
+          "authors": [
+            "Xuliang Huang",
+            "Tianxiang Zhao",
+            "Chengwei Qin",
+            "Yao Shu"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06395v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06090v1",
+          "title": "Overview of the NTCIR-19 SciClaimEval Task: Cross-modal Claim Verification in Scientific Papers",
+          "summary": "This paper presents an overview of \\emph{SciClaimEval}, a pilot task at NTCIR-19 on verifying scientific claims against the tables and figures of the papers in which they appear. Our dataset pairs authentic claims from 180 papers in machine learning, natural language processing, and medicine with contrastive versions of their tables and figures, one supporting the claim and one minimally modified so that it does not. The task comprises two subtasks: deciding whether a piece of evidence supports a claim, and selecting which of two evidence versions does. Twenty-two teams registered, the highest number among NTCIR-19 tasks, and 14 submitted 177 runs. Most systems built on multimodal large language models, relying on prompting and multi-stage inference rather than task-specific fine-tuning. On the first subtask, the best systems reached 98.1\\% pair accuracy, but all six top-ranked systems relied on the contrastive pairs; the best system that judged each claim-evidence pair on its own scored 24.3 points lower. Open-weight models, embedded in carefully designed pipelines, matched proprietary ones. Yet verifying a single claim against its evidence, the setting that matters in practice, remains an open problem.",
+          "published": "2026-11-04T07:33:52Z",
+          "updated": "2026-11-04T07:33:52Z",
+          "authors": [
+            "Xanh Ho",
+            "André Greiner-Petter",
+            "Florian Boudin",
+            "Yun-Ang Wu",
+            "Sunisth Kumar",
+            "Tian Cheng Xia",
+            "Hiba Akbi",
+            "Tim Schopf",
+            "Akiko Aizawa"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06090v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06065v1",
+          "title": "ProcessPrefBench: Evaluating Cross-Task Transfer of Individual Process Preferences from Naturalistic Human-AI Interaction",
+          "summary": "In natural human-AI dialogue, users' corrections, requests, and self-descriptions carry reusable signals about how they want work to be done. These signals reveal individual process preferences, user-specific standards for evidence, depth, analytical focus, procedure, and delivery. We ask whether a preference revealed in one dialogue can shape an assistant's later answer when the task does not restate it. ProcessPrefBench uses three months of natural dialogues from two knowledge workers to build 66 source-target cases separately judged for source evidence and target applicability. Sources are preselected, so the benchmark tests application rather than retrieval. We test three models with target-only, full-history, and distilled-preference prompts. Target-specific 0-2 rubrics score preference realization, and a task gate flags severe failures. Compared with target-only prompting, full-history and imperative distilled-preference prompting raise preference realization by 0.204 and 0.244 points on the 0-2 scale, respectively, with no reliable advantage from distillation. Fabricated-evidence failures rise from 5.8% under target-only prompting to 10.1% under full-history and 10.4% under imperative prompting. ProcessPrefBench highlights a tension in learning from dialogue, where drawing on prior interactions can improve preference realization yet also invite fabricated evidence. We hope it helps build assistants that honor a user's process preferences without sacrificing factual reliability.",
+          "published": "2026-11-04T07:10:46Z",
+          "updated": "2026-11-04T07:10:46Z",
+          "authors": [
+            "Yiwen Yang",
+            "Guanming Liu"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06065v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06048v1",
+          "title": "SVGFaith: A Two-Layer Meta-Evaluation of Faithfulness Metrics for Text-to-SVG Generation",
+          "summary": "Text-to-SVG systems are commonly evaluated by applying raster-image metrics to rasterised outputs, yet whether these scores capture fine-grained prompt faithfulness remains unclear. We introduce SVGFaith, a two-layer meta-evaluation framework in which the more faithful candidate of each pair is determined by construction or by human judgment. SVGFaith-Diagnostic contains 1,842 controlled contrastive pairs across eight capability axes, split evenly between two directions: two renderings compared against one prompt, and two descriptions compared against one rendering. SVGFaith-Arena contains 1,327 human-annotated comparisons of real generator outputs. On SVGFaith-Diagnostic, CLIP and three other image--text embedding metrics reach at least 0.789 pairwise accuracy on object identity but at most 0.672 on spatial relations and attribute binding, where chance is 0.5. We further introduce SVGFaith-Score, an interpretable pointwise metric. A domain-tuned decomposer turns each prompt into a dependency graph of atomic visual requirements, a visual question answering model scores whether each requirement is satisfied, and a requirement's score is discounted when its prerequisites score low. In addition to the overall score, the per-requirement scores show which requirements are judged unsatisfied and which inherit discounts from their prerequisites. SVGFaith-Score significantly outperforms all nine baselines, including a Qwen3.5-122B-A10B judge, on Arena and in both Diagnostic directions. Code and data: https://github.com/Yukinonooo/SVGFaith.",
+          "published": "2026-11-04T06:55:22Z",
+          "updated": "2026-11-04T06:55:22Z",
+          "authors": [
+            "Guotao Liang",
+            "Haitao Zhou",
+            "Biao Liu",
+            "Huanxuan Liao",
+            "Lingfeng Qiao",
+            "Qian-Wen Zhang",
+            "Qian Yu",
+            "Di Yin",
+            "Xing Sun"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.CL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06048v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06000v1",
+          "title": "Intra-Architecture Source Attribution for Stable Diffusion: A New Task with Benchmark Dataset and Baseline",
+          "summary": "Designing systems that attribute a generated image to its source model has lately become a major area of AI research. Most existing datasets and systems related to image source attribution are targeted towards the detection of architectural signatures of the source models. Distinct from this, focusing on stable diffusion, we introduce a novel task, IntrAA-SD, Intra-Architecture source Attribution for Stable Diffusion, where the source models to be differentiated share the same architectural backbone and differ only due to fine-tuning. The proposed task aligns with the emergence of fine-tuned generators having the same architecture, like Juggernaut XL and RealVis XL, which are fine-tuned versions of Stable Diffusion XL (SDXL). We provide a first-of-its-kind $140$K-image benchmark dataset containing images generated from different fine-tunes of SDXL, along with in-domain and out-of-distribution prompts. We also provide a baseline framework for IntrAA-SD, which leverages a style-conditioned Mixture-of-Experts network. It uses a frozen CLIP backbone to capture the image style and gate the MoE, which processes fine-tuned trace features from a high-resolution LoRA-adapted DINOv2 network. The fine-tuned models used, the prompting strategies considered, and the formation details employed in the novel dataset are elaborated. Our baseline intra-architecture source attribution method is evaluated in terms of attribution accuracy on our dataset, and ablation studies are also performed. Code and dataset is available at https://github.com/mallikagarg/IntrAA-SD.",
+          "published": "2026-11-04T05:47:50Z",
+          "updated": "2026-11-04T05:47:50Z",
+          "authors": [
+            "Ashutosh Dayal",
+            "Mallika Garg",
+            "Debashis Sen"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06000v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.05994v1",
+          "title": "FedIA: Instance-Aware Cross-Modal Representations for Federated Prompt Learning",
+          "summary": "Federated Prompt Learning (FPL) enables parameter-efficient adaptation of pre-trained Vision-Language Models across decentralized clients without exchanging raw data. To cope with cross-client heterogeneity, existing FPL methods typically pair a globally shared prompt with a client-specific local prompt. However, this design personalizes only at the client level: the same local prompt is applied to all samples of a client, and the global and local prompts are combined in an input-agnostic, fixed manner. Consequently, it overlooks the substantial visual variations among samples within the same client and cannot adjust the balance between shared and personalized knowledge to each input. To address these limitations, we propose Federated Prompt Learning with Instance-Aware Cross-Modal Representations (FedIA), an FPL framework that learns instance-aware cross-modal representations. Specifically, FedIA first uses global text prompts as client-invariant semantic anchors to select image patches most relevant to each candidate class, suppressing distracting regions. The selected visual evidence then conditions the generation of instance-aware local text representations. Finally, an adaptive global-local fusion module calibrates the contributions of local and global text representations for each image-class pair. In this way, FedIA shifts personalization in FPL from the client level to the instance level while preserving the semantic knowledge shared across clients. Extensive experiments under domain shift, pathological label skew, and Dirichlet-based label skew show that FedIA outperforms FPL baselines, with maximum accuracy gains of 1.44\\%-4.37\\% over the latest baseline across the three settings. Ablation studies and analyses further verify the complementary contributions of instance-aware representation generation and adaptive global-local fusion.",
+          "published": "2026-11-04T05:39:46Z",
+          "updated": "2026-11-04T05:39:46Z",
+          "authors": [
+            "Xuanjing Zhang",
+            "Qi Guo",
+            "Yanan Qiao",
+            "Yong Han",
+            "Junge Bo"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.05994v1"
+        }
+      ]
+    },
+    {
+      "id": "industrial-anomaly-detection",
+      "name": "工业异常检测",
+      "papers": []
+    },
+    {
+      "id": "adversarial-attacks",
+      "name": "对抗攻击",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.06268v1",
+          "title": "Beyond Identity Creation: Bilinear Sybil Cost in Identities and Time",
+          "summary": "Sybil defenses price the creation of an identity, yet influence goes, again and again, to active identities. We study the cost of maintaining influence. A defense has a bilinear Sybil cost with ratio $A$ if keeping $s$ identities active for $T$ periods costs at least $sT/A$ honest units: the average cost per identity-window is at least $1/A$ times an honest participant's cost. Recurrence alone does not guarantee this cost. The cost can be carried over from earlier periods, shared among many identities, or be negligible when fast hardware does the work of thousands of honest devices. We give four sufficient conditions for a defense that checks every identity each period to achieve bilinear Sybil cost: identity binding, freshness, a shared deadline, and sequential, non-batchable work. They yield two guarantees: a bilinear total cost, with $A$ the speed advantage of the adversary's fastest hardware, and, because the work must be fresh and finished by a common deadline, a bound on the identities active in a period by the processors running at that time. We prove that none of the four follows from the other three. A verifiable delay function on an identity-bound input meets all four without payments, with $A$ of 2 to 8 for CPUs and about 28 for a hypothetical ASIC, against $10^3$ to $10^7$ for hash puzzles. We measure one active identity per core per period against about 80,000 under a signed heartbeat, no gain from batching up to 1,000 identities, and rejection of all tested attacks.",
+          "published": "2026-11-04T10:15:20Z",
+          "updated": "2026-11-04T10:15:20Z",
+          "authors": [
+            "Homayoun Maleki",
+            "Nekane Sainz",
+            "Jon Legarda",
+            "Igor Santos-Grueiro"
+          ],
+          "categories": [
+            "cs.CR"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06268v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06103v1",
+          "title": "SenTrojan: Revealing Analog Hardware Trojan Attacks on Sensors",
+          "summary": "Sensors bridge the physical and digital worlds, making their integrity critical to cyber-physical system security. Existing sensor attacks largely exploit unintended and sensor-specific physical vulnerabilities, limiting their generalizability and motivating a different threat model, i.e., whether an adversary can implant hidden attack surfaces into sensors before deployment. In this paper, we present SenTrojan, an analog hardware Trojan framework for sensors. SenTrojan embeds malicious functionality into analog signal circuitry commonly shared across diverse sensor architectures, and activates the hidden behavior through crafted external physical signals. Once activated, SenTrojan can induce sensor malfunctions ranging from permanent denial-of-service to static or dynamic spoofing. To achieve these effects under different architectural constraints, we introduce two complementary designs. The Logic-Rule-Driven (LRD) Trojan adds lightweight analog monitoring logic to detect trigger features such as frequency and amplitude, enabling reliable activation across various sensor types. The Physical-Effect-Driven (PED) Trojan targets sensors with exploitable native analog effects, e.g., nonlinearity and rectification, and realizes attacks with minimal component insertion. We evaluate SenTrojan on 14 sensors spanning 6 transduction principles and demonstrate its effectiveness across diverse real-world scenarios. Overall, SenTrojan achieves an average successful trigger rate above 95%, maintains over 97% similarity to benign behavior, incurs zero false-trigger rate for LRD designs, and introduces less than 5% average deviation in drift, noise floor, and response time. To our knowledge, this work is the first systematic study of analog sensor Trojans, broadening sensor security from unintended physical vulnerabilities to intentional supply-chain compromise.",
+          "published": "2026-11-04T07:45:46Z",
+          "updated": "2026-11-04T07:45:46Z",
+          "authors": [
+            "Kun Wang",
+            "Ruochen Zhou",
+            "Wenjun Zhu",
+            "Shilin Xiao",
+            "Kai Wang",
+            "Chen Yan",
+            "Xiaoyu Ji",
+            "Wenyuan Xu"
+          ],
+          "categories": [
+            "cs.CR"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06103v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.06082v1",
+          "title": "Catastrophic Overfitting is Weight Drift the Training Loss Cannot See",
+          "summary": "Fast adversarial training (FAT) makes robust training affordable by replacing the multi-step attack with a single-step one, but it suffers from catastrophic overfitting (CO): partway through training, robustness to multi-step attacks collapses to near zero while the single-step attack used for training keeps being repelled. We show that CO is a quiet escape of the weights. Across the event the network's clean behavior quietly improves, and moving from the weights just before CO to those just after it changes the training objective only marginally while destroying most of the robustness. The training objective is therefore nearly blind to the displacement it causes, so it exerts no force to undo it. The exponential moving average (EMA) of the weights, which FAT protocols already maintain, does not accumulate this drift and stays robust through the entire event. This observation suggests a nearly free fix: when validation robustness drops, reset the weights to their EMA. We build this guard on top of a coupling-based base method designed so that its average stays inside the robust region. The resulting training removes CO in every one of our runs and attains the strongest AutoAttack accuracy among fast methods on all three benchmark datasets, including a clear margin on CIFAR-100, where it also clears the multi-step reference at roughly half its cost. Code is available at https://github.com/fzjcdt/co-weight-drift.",
+          "published": "2026-11-04T07:23:32Z",
+          "updated": "2026-11-04T07:23:32Z",
+          "authors": [
+            "Chao Pan"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CR"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.06082v1"
+        }
+      ]
+    }
+  ]
+}
