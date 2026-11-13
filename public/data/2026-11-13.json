@@ -1,0 +1,574 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-13",
+  "generatedAt": "2026-11-13T07:00:28.768Z",
+  "startedAt": "2026-11-13T06:59:27.635Z",
+  "source": "arXiv API",
+  "maxResultsPerQuery": 100,
+  "mode": "rolling-window-incremental",
+  "windowStart": "2026-11-12T05:29:22.959Z",
+  "windowEnd": "2026-11-13T06:59:27.635Z",
+  "historicalPaperCount": 5355,
+  "topics": [
+    {
+      "id": "multimodal-llm-distillation",
+      "name": "多模态大语言模型蒸馏",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.16727v1",
+          "title": "From Foundation VLM to Versatile Driving VLM: A Triplet Incremental Training Approach",
+          "summary": "Adapting general Vision-Language Models (VLMs) to Autonomous Driving (AD) is thought to require heavy 3D spatial priors or intrusive architectural overhauls to compensate for a lack of spatial grounding. In this work, we present a counterintuitive pilot study: off-the-shelf general VLMs already exhibit remarkable adaptability across diverse driving tasks, while precise metric depth remains the primary missing link, a bottleneck readily addressable via onboard sensors and depth foundation models. To this end, we introduce the Triplet Incremental Training Framework, a non-intrusive paradigm that seamlessly instills 3D geometric awareness into a general VLM backbone while fully preserving its open-world capabilities. Driven by automatically constructed (image, depth, QA pair) triplets, our framework operates via a unified tri-stream training pipeline: an unfrozen primary VLM stream to adapt to driving tasks, an auxiliary depth stream that guides the visual backbone to implicitly imagine 3D scene geometry via explicit geometric constraints, and a frozen twin VLM stream employing logit-level KL distillation to prevent semantic drift. Crucially, the auxiliary depth branch is discarded during deployment, ensuring the enhanced geometric awareness comes with zero inference overhead. We evaluate our framework across four major benchmarks targeting four diverse capabilities spanning 3D spatial perception, driving-oriented language reasoning, end-to-end planning, and general multimodal understanding. Our approach outperforms state-of-the-art driving VLMs, rivals domain-specific expert models in 3D perception, and successfully retains its original general reasoning capabilities. This demonstrates that Triplet Incremental Training offers a unified, deployment-ready paradigm for transforming general foundation models into robust driving intelligences.",
+          "published": "2026-11-12T12:39:25Z",
+          "updated": "2026-11-12T12:39:25Z",
+          "authors": [
+            "Shengtao Wu",
+            "Zichao Dong",
+            "Weixuan Qiao",
+            "Xiaolu Liu",
+            "Xin Zhan",
+            "Junbo Chen",
+            "Jianke Zhu"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16727v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16655v1",
+          "title": "MuViRL: Multimodal View-Invariant Visual Speech Representation Learning via Calibrated View Aggregation",
+          "summary": "Multimodal representation learning combines complementary signals to capture shared semantic information. For dynamic scenes, these representations need to remain consistent across views while preserving distinctions between temporal states. In visual speech representation learning, view variation changes the visibility and reliability of articulation cues, making it difficult to learn such representations from synchronized audio and video. To address this challenge, we propose MuViRL, a self-supervised framework for multimodal view-invariant visual speech representation learning via calibrated view aggregation. The framework combines synchronized 3D Gaussian view synthesis with multimodal self-supervision to learn consistent representations from real and synthesized data. A multimodal decision model learns relative view utility from teacher prediction losses, and its calibrated scores guide the aggregation of complementary information. Aggregation-to-Single Distillation transfers the aggregated predictions to a single branch. Real-synthetic alignment matches synchronized windows across views while preserving their temporal relations. Experiments on real and synthesized multiview data demonstrate that MuViRL improves multimodal representation consistency and visual speech recognition performance across views.",
+          "published": "2026-11-12T11:31:59Z",
+          "updated": "2026-11-12T11:31:59Z",
+          "authors": [
+            "Fei Su",
+            "Kai Qiu",
+            "Juan Liu"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16655v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16418v1",
+          "title": "Model Distribution-Aware Multimodal Dataset Distillation",
+          "summary": "Multimodal dataset distillation (MDD) aims to reduce the cost of vision-language pre-training by synthesizing compact image-text datasets. Although recent feature-matching methods have improved distillation efficiency, synthetic data may become specialized to the model representations encountered during optimization, limiting generalization to unseen model states. We propose Model Distribution-Aware Multimodal Dataset Distillation (MDA-DD), which leverages supervision from a dynamic staggered queue of models at different training stages. We further introduce asymmetric dual projection for complementary alignment in visual and linguistic spaces and an uncentered second-order moment objective that retains mean-related cross-modal information. Experiments on Flickr30K and MS-COCO demonstrate consistent retrieval improvements over existing methods across synthetic-data budgets. With only 100 synthetic pairs, MDA-DD improves IR@1 and TR@1 on Flickr30K by 12.9 and 18.2 percentage points, respectively, over the strongest baseline at the same budget, outperforming all compared methods using 500 pairs on both datasets across all six retrieval metrics.",
+          "published": "2026-11-12T07:29:09Z",
+          "updated": "2026-11-12T07:29:09Z",
+          "authors": [
+            "Jiajun Shen",
+            "Yonglin Wu",
+            "Ruonan Yu",
+            "Xinchao Wang"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16418v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16405v1",
+          "title": "AntEmbed: Dual-Mode Multimodal Embedding Model for Efficient and Fine-Grained Retrieval",
+          "summary": "Discriminative embeddings encode original multimodal inputs efficiently but struggle with fine-grained semantics. Generative embeddings use reasoning to capture query intent and relevance evidence, but incur higher computational costs. We propose AntEmbed, a dual-mode multimodal embedding model that supports efficient retrieval and reasoning-enhanced fine-grained matching in a unified embedding space. First, we construct retrieval-oriented reasoning content that captures query intent and confusion-aware semantic evidence. We treat original and reasoning-enhanced candidate inputs as semantically equivalent views, and use multi-positive contrastive learning with a single embedding token to align discriminative and generative embeddings. Second, cross-mode self-distillation transfers fine-grained semantic information from reasoning-enhanced to original representations through candidate similarity-distribution distillation and query representation alignment. This strengthens discriminative embeddings without requiring additional online reasoning. Both retrieval modes share a single candidate index. On MMEB-v2, AntEmbed-8B achieves an overall score of 81.5 with reasoning-enhanced embeddings, outperforming the strongest baseline by 3.1 points.",
+          "published": "2026-11-12T07:12:37Z",
+          "updated": "2026-11-12T07:12:37Z",
+          "authors": [
+            "Kehang Jia",
+            "Teng Liu",
+            "Juntao Li",
+            "Hua Chen",
+            "Jinxiong Chang",
+            "Xiaobo Liang",
+            "Min Zhang"
+          ],
+          "categories": [
+            "cs.IR"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16405v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16402v1",
+          "title": "Teach with Blinks: Breaking Linguistic Momentum in On-Policy Distillation for Fine-Grained Multimodal Perception",
+          "summary": "On-policy distillation (OPD) has emerged as an effective post-training approach to improving fine-grained perception in multimodal large language models by amortizing costly inference-time zooming operations into a single-pass recipe. However, vanilla OPD is inherently susceptible to linguistic momentum: the teacher can follow the student's erroneous prefixes, thus weakening corrective supervision. To address this, we propose Blink On-Policy Distillation (BlinkOPD), in which the teacher \"blinks\" at every token: it reads the same prefix once with its eyes open and once with its eyes closed. A first-glance gain further strengthens the correction on rollouts that conflict with the teacher. By extracting more effective supervision from each on-policy trajectory, BlinkOPD achieves state-of-the-art average performance across six fine-grained benchmarks using only 500 training images (12x less data) than existing OPD methods. Beyond fine-grained perception, BlinkOPD also demonstrates strong zero-shot improvements across ten held-out benchmarks spanning general visual perception, visual hallucination, and multimodal reasoning abilities. Code: https://github.com/Supltz/BlinkOPD",
+          "published": "2026-11-12T07:11:20Z",
+          "updated": "2026-11-12T07:11:20Z",
+          "authors": [
+            "Tangzheng Lian",
+            "Hang Zhang",
+            "Guanyu Hu",
+            "Renjiu Hu",
+            "Zhensong Zhang",
+            "Jiankang Deng",
+            "Jifei Song"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16402v1"
+        }
+      ]
+    },
+    {
+      "id": "diffusion-models",
+      "name": "扩散模型",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.17336v1",
+          "title": "Back to Pixels: Lifting Latent Video Diffusion into Pixel Space",
+          "summary": "Frontier video generation models work in a VAE latent space that compresses video in both space and time. This compression made training tractable, but now limits high-resolution, controllable, and interactive generation -- doubling resolution quadruples token count, conditions apply to groups of frames rather than individual ones, and each response must wait for the rest of its multi-frame block. We present PixVid, a simple yet effective method that lifts a pretrained latent video model to directly generate every frame in pixel space. PixVid keeps the diffusion transformer and replaces the VAE decoder with a convolutional head that renders its outputs into pixels. We find that predicting clean video rather than velocity, together with a larger noise shift, is key to quality. Finetuned from Wan2.1-14B, PixVid is competitive with the latent baseline within $\\sim 1.3$M training clips. Working framewise in pixels, it generates at $2\\times$ higher resolution with the same per-frame token count, keeps depth-conditioned video editing aligned under fast motion, and responds to each action at the next frame. Project page: https://chenshuo20.github.io/PixVid/",
+          "published": "2026-11-12T18:59:55Z",
+          "updated": "2026-11-12T18:59:55Z",
+          "authors": [
+            "Yanke Song",
+            "Shuo Chen",
+            "Chris Rockwell",
+            "Guande He",
+            "Nan Liu",
+            "Desai Xie",
+            "Tianpei Gu",
+            "Yong-Hyun Park",
+            "Aryan V S",
+            "Dennis Yuren Menn",
+            "Ming-Hsuan Yang",
+            "Xun Huang"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17336v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.17324v1",
+          "title": "K2V: Generative Keyframing For Physically Plausible Video Generation",
+          "summary": "Video diffusion models are able to generate samples with high-quality appearance and textural qualities. However, content produced by these methods is known to exhibit significant physical errors. This is because, in a classical video generation setting, all physical reasoning must take place simultaneously and exclusively within the diffusion process.We propose to resolve these issues by redistributing the task of physical reasoning onto a language model-backed keyframe generation module, which allows for explicit reasoning in language, and fine-grained control over the appearance of the video at important moments in the video. We then condition a video generation model with these keyframes, reducing the role of the diffusion model to the simpler task of interpolating between physically-correct intermediate states, rather than inferring an entire sequence with diffusion. Results demonstrate that our approach significantly outperforms existing approaches, achieving state-of-the-art performance on the Physics-IQ Verified benchmark and PhyGenBench.",
+          "published": "2026-11-12T18:59:09Z",
+          "updated": "2026-11-12T18:59:09Z",
+          "authors": [
+            "Felix O'Mahony",
+            "Daniel Olmeda Reino",
+            "Roberto Cipolla",
+            "Ayush Tewari"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17324v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.17194v1",
+          "title": "eDMD: Endpoint Distribution Matching for Few-Step Diffusion Distillation",
+          "summary": "Distribution matching distillation (DMD) has emerged as a leading paradigm for distilling diffusion models into few-step students, where an auxiliary fake score model tracks the student's distribution and the discrepancy between the teacher and fake predictions drives the student toward the teacher. In multi-step distillation, although only the student's final output is delivered, existing methods train the fake model on intermediate states or across all denoising steps. Consequently, the student's update signal becomes entangled with intermediate distributions, which can distort the matching direction and remain nonzero even after the student's final outputs already match the teacher distribution. To resolve this mismatch, we propose Endpoint Distribution Matching Distillation (eDMD), which trains a single shared fake model exclusively on the student's final outputs and uses it to correct every denoising step. Our theoretical analysis proves that this endpoint reference guarantees that the distribution matching term vanishes if and only if the student's final output distribution matches the teacher's, regardless of intermediate distributions. Beyond the fake reference, we further strengthen teacher supervision through a precise teacher (PT) that replaces single-step guided predictions with short multi-step trajectories on the final noise interval, paired with a calibrated query density for intermediate steps. Experiments on SD3-Medium, FLUX.2-klein (4B and 9B), and Qwen-Image-2.1 demonstrate that eDMD consistently outperforms existing distribution matching methods for 4-step generation.",
+          "published": "2026-11-12T17:57:48Z",
+          "updated": "2026-11-12T17:57:48Z",
+          "authors": [
+            "Tong Zhao",
+            "Xianfang Zeng",
+            "Yucheng Han",
+            "Ruoyu Wang",
+            "Mingkun Lei",
+            "Gang Yu",
+            "Chi Zhang"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17194v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.17105v1",
+          "title": "Predicting Ethanol Drinking Status from Nonhuman Primate Liver Histology: A Proof of Concept for Parameter-efficient Fine-tuning in Few-Shot Vision-Language Modeling",
+          "summary": "Combining vision-language models (VLMs) with parameter-efficient fine-tuning (PEFT) offers a promising approach to few-shot whole-slide image (WSI) classification in computational pathology. This study evaluates this approach for predicting ethanol drinking status from nonhuman primate liver histology. Adapters are evaluated against non-PEFT configurations on a subset of the Monkey Alcohol Tissue Research Resource (MATRR). All evaluated PEFT configurations achieve higher mean balanced accuracy than the non-PEFT baselines. For example, in the four-shot setting, attention-based multiple instance learning (ABMIL) alone achieves 43.5% mean balanced accuracy, compared with 78.1% after adding an adapter. Qualitative attention analysis shows that textual pathway adaptations produce localized attention heatmaps, while visual pathway adaptations produce more diffuse ones. A pathologist's review identified similar histological features across adaptations.",
+          "published": "2026-11-12T17:02:27Z",
+          "updated": "2026-11-12T17:02:27Z",
+          "authors": [
+            "Amirmohammad Mohammadi",
+            "Rupak Khadka",
+            "Kathleen A. Grant",
+            "Mary Lauren Benton",
+            "Joshua Peeples"
+          ],
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17105v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.17067v1",
+          "title": "An Invariant Neural-Network Eddy-Viscosity Closure with Iterative Solver Coupling for Molten Salt Fast Reactor Thermal-Hydraulics",
+          "summary": "System thermal-hydraulics codes such as the System Analysis Module (SAM) close turbulence on coarse meshes with algebraic zero-equation mixing-length models. These models cannot represent the non-equilibrium turbulence, flow separation, and large-scale recirculation of open-cavity advanced reactors. We develop an invariant neural-network eddy-viscosity closure for SAM and apply it to the Molten Salt Fast Reactor (MSFR). The closure predicts the turbulent kinetic energy and timescale of each element from the flow and geometry of its neighbors, without solving turbulence transport equations. The resulting non-negative eddy viscosity enters the implicit diffusive operator, which keeps the momentum equations well conditioned. We prove that the closure is exactly invariant to translation, Galilean boost, rotation, reflection, and neighbor ordering. A network trained on high-order Nek5000 fields sees a different feature distribution on the coarse SAM mesh. We remove this covariate shift by iteratively retraining the network on SAM flow states against fixed Nek5000 targets. For a held-out steady state, the coupled closure reproduces the single recirculation cell and eddy-viscosity plume of the Nek5000 reference. In a 120 s pump-coastdown transient, it halves the velocity error of the mixing-length model, from 37.6% to 17.7%, and matches the Nek5000 eddy viscosity with a time-averaged relative error of 12%. The remaining velocity error comes from the coarse mesh. The coupled transient takes about 0.2 core-hours, compared with about 330 core-hours for Nek5000. The results show that the closure can recover two-equation RANS turbulence behavior in a coarse-mesh system code at a small fraction of the CFD cost.",
+          "published": "2026-11-12T16:41:34Z",
+          "updated": "2026-11-12T16:41:34Z",
+          "authors": [
+            "Zaid Abulawi",
+            "William Oliveira",
+            "Akzhol Almukhametov",
+            "Jun Fang",
+            "Ling Zou",
+            "Rui Hu",
+            "Stefano Lorenzi",
+            "Yang Liu"
+          ],
+          "categories": [
+            "physics.flu-dyn",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17067v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16484v1",
+          "title": "TAPES: Terminal Adjoint-Propagated Error Scheduling for Financial Diffusion Samplers",
+          "summary": "Financial diffusion samplers are often reused with a small number of function evaluations (NFE) inside scenario and risk pipelines, where numerical time-grid error can distort terminal quantities such as covariances, tails, and drawdown proxies. We study offline grid construction for a frozen probability-flow ODE: the score network, conditioning, Euler solver, report normalization, and deployment NFE remain fixed. TAPES (Terminal Adjoint-Propagated Error Scheduling) estimates signed local defects by Richardson comparisons, transports them through the remaining discrete flow and a terminal-report adjoint, and optimizes the squared norm of their sum before a capped direct refinement. We show that this transported signed sum is the first-order terminal-report error and quantify, under an aligned-defect model, the inefficiency of diagonal criteria. Across six budgets on a regime-switching simulation and chronologically held-out Mag7 contexts, TAPES gives the lowest design- and audit-report errors in all 24 dataset--budget--report rows within the reported five-pipeline panel. Cross-budget mean relative audit-error reductions are about 10--11% on Regime-SV and about 1% on Mag7, with Bonferroni intervals excluding zero; all displayed winners persist under a doubled-resolution reference, and a small Regime-SV Heun probe preserves the TAPES-first audit ordering. TAPES changes only the offline schedule and retains the prescribed deployment NFE; claims concern numerical fidelity to frozen generators.",
+          "published": "2026-11-12T08:53:44Z",
+          "updated": "2026-11-12T08:53:44Z",
+          "authors": [
+            "Yilie Huang"
+          ],
+          "categories": [
+            "q-fin.CP",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16484v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16417v1",
+          "title": "VBot Exo2Ego Policy: Lightweight Data Collection and Exocentric-to-Egocentric Video Generation",
+          "summary": "We present VBot Exo2Ego Policy, a video generation model that turns third-person videos into first-person observations of a selected actor, offering a practical way to expand first-person operation data from abundant real-world footage. To support this goal, we introduce a lightweight data collection pipeline and mobile app that support first-person recording, third-person recording, and synchronized capture of both views. This setup combines accessible single-view collection with paired RGB and camera geometry for learning cross-view correspondence. Building on a pretrained video diffusion transformer, our model incorporates geometric guidance and auxiliary supervision from semantic masks and hand keypoints to facilitate optimization and improve the fidelity of hand-object interactions. Camera geometry is injected stochastically during training and gradually removed, allowing inference without target-camera calibration. To accommodate the diversity of Internet videos, we combine source-video perception and reasoning, optional actor references, and multi-shot adaptation to identify the intended actor and follow an operation across camera cuts. The collection system and generation model provide a foundation for expanding first-person operation data across tasks, scenes, and participants.",
+          "published": "2026-11-12T07:27:47Z",
+          "updated": "2026-11-12T07:27:47Z",
+          "authors": [
+            "Tong Rao",
+            "Zhihao Zhang",
+            "Yuntian Wang",
+            "Siyu Zhou",
+            "Hailong Qin",
+            "Yinan Yu"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16417v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16345v1",
+          "title": "DRAMA: Dissecting Attention Redundancy for Accelerating Multimodal Diffusion Large Language Models",
+          "summary": "Multimodal diffusion large language models (dLLMs) generate text through iterative masked denoising with bidirectional attention, offering a compelling alternative to autoregressive vision-language modeling. However, each denoising step requires a full forward pass over long multimodal sequences in which visual tokens dominate the sequence length, and a fixed step budget further compounds this quadratic per-step cost. Existing inference acceleration approaches for multimodal dLLMs characterize attention redundancy implicitly, motivating designs from isolated attention visualizations rather than from measurement. We close this gap with DRAMA, a training-free acceleration framework grounded in a systematic dissection of attention redundancy in multimodal dLLMs. By probing attention tensors along spatial and temporal axes, we reveal two persistent redundancy structures: (i) attention mass consistently concentrates on a sparse subset of visual tokens, and (ii) attention distributions rapidly stabilize across denoising steps after an initial formation phase. These findings motivate two complementary mechanisms: Spatial-Redundancy-Aware Visual Token Pruning (SVTP) and Sufficiency-Guided Adaptive Stopping (SGAS). Together, DRAMA achieves an average 18.67 times inference speedup across six vision-language benchmarks without training, architectural modification, or attention caching, while maintaining competitive accuracy. Our results establish a strong, measurement-grounded acceleration baseline for multimodal dLLM inference.",
+          "published": "2026-11-12T06:04:08Z",
+          "updated": "2026-11-12T06:04:08Z",
+          "authors": [
+            "Yi-Hsin Hung",
+            "Fangfu Liu",
+            "Shao-Yuan Lo",
+            "Chu-Song Chen"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16345v1"
+        }
+      ]
+    },
+    {
+      "id": "test-time-adaptation",
+      "name": "测试时领域自适应",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.17287v1",
+          "title": "Negative-Only Policy Optimization for One-Sided Verifiable Rewards",
+          "summary": "Reinforcement learning with verifiable rewards (RLVR) typically relies on a verifier that can reliably judge whether sampled solutions are correct. However, in many realistic settings, complete verification is generally unavailable, while cheap checks can only falsify failures. We formalize this regime as one-sided verifiability (OSV): verified negatives are reliable counterexamples, but verified positives are merely non-falsified candidates and may contain many false positives. This asymmetry makes standard RLVR unreliable, because reinforcing verified positives can directly reward shortcuts that pass partial checks. To address this issue, we propose Negative-Only Policy Optimization (NOPO), which treats verified positives as unlabeled and updates the policy only by suppressing trusted verified negatives. Specifically, NOPO combines a reference-relative negative suppression loss with a group-level adapter that scales each update by the proportion of non-falsified responses. Across unit-test, constraint-check, and LLM self-verifiers, NOPO improves pass@k over baselines on code, logic, and math benchmarks when oracle rewards are unavailable. These gains persist under inference-time scaling and cross-benchmark transfer.",
+          "published": "2026-11-12T18:52:33Z",
+          "updated": "2026-11-12T18:52:33Z",
+          "authors": [
+            "Jiacheng Xu",
+            "Shuo He",
+            "Fuxiang Zhang",
+            "Chaojie Wang",
+            "Bo An"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17287v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16925v1",
+          "title": "Report of the 8th LSVOS Challenge: Mobile Unified Multimodal Understanding",
+          "summary": "This report summarizes the Mobile Unified Multimodal Understanding (MUMU) track of the 8th Large-scale Video Object Segmentation (LSVOS) Challenge, held in conjunction with ECCV 2026. MUMU asks for a single unified model that jointly performs multi-concept image tagging over quality, scene, and event vocabularies, open-vocabulary object detection, and concise image captioning, within a budget of 0.5B parameters and 8 GB of peak inference memory. Submissions are ranked by a weighted task score scaled by an efficiency factor. We describe the tasks, rules, and evaluation protocol, report the final results, and review the methods of the top three teams. All three leading solutions build on the compact Florence-2-base model, but extend it in different ways: lightweight tagging heads with cross-task inference refinement, a shared low-rank adapter trained on coverage-aware multi-source data with task-dependent decoding, and a training-free pipeline that maps captions to tags and applies detection test-time augmentation. The results show that a compact prompt-based vision-language model can serve all three outputs when supervision, decoding, and cross-task cues are designed for each task, while open-vocabulary detection on novel categories remains the main bottleneck.",
+          "published": "2026-11-12T15:14:54Z",
+          "updated": "2026-11-12T15:14:54Z",
+          "authors": [
+            "Chang Liu",
+            "Henghui Ding",
+            "Tong Yang",
+            "Dayoung Kil",
+            "Seong-heum Kim",
+            "Qilin Xiang",
+            "Ronghao Zheng",
+            "Ziyang Zhang",
+            "Shanlin Jiang",
+            "Ruohan Shi",
+            "Qilin Fan",
+            "Chengfeng Qiu",
+            "Kaifeng Wei"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16925v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16468v1",
+          "title": "Physics-constrained differentiable causal discovery of constitutive mechanisms through boundary value problems",
+          "summary": "Data-driven constitutive model discovery is recast as causal discovery of mechanism parent sets using time-unrolled structural causal models. Hard-coding balance laws and constitutive skeletons, candidate graphs score environment--mechanism and state--state edges via weak-form equilibrium gaps evaluated from full-field displacements, avoiding the need to measure stresses or internal variables. An adaptive lasso and a NOTEARS-type constraint ensure graph acyclicity and an explicit evaluation order, treating climate-chamber protocols as interventions. Automatic differentiation yields the score's Gauss--Newton matrix as a local identifiability certificate, driving greedy D-optimal test design. In a synthetic study on a hygro-thermo-viscoelastic damaging plate (8 true edges among 13 candidates), interventional data recover the exact true graph in 7 of 10 runs (0.01px displacement noise) with zero attribution error. Conversely, observational data with a temperature--moisture correlation of $-0.998$ fail entirely because confounded scores are 250--380 times flatter. Observationally discovered models reproduce training climates (3.6% error) but mispredict hot and humid climates by up to 41.5% (16.9% average), whereas interventionally discovered models stay within 3.2%. A correlation sweep shows the certificate successfully predicts attribution errors, though weak-form score noise bias remains a primary limitation. Computed without knowledge of the truth, the D-optimal design selects test sets ranked second or third out of 126 candidates.",
+          "published": "2026-11-12T08:22:35Z",
+          "updated": "2026-11-12T08:22:35Z",
+          "authors": [
+            "Michael A. Kraus"
+          ],
+          "categories": [
+            "math-ph"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16468v1"
+        }
+      ]
+    },
+    {
+      "id": "automated-essay-scoring",
+      "name": "作文评分",
+      "papers": []
+    },
+    {
+      "id": "knowledge-tracing",
+      "name": "知识追踪",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.17123v1",
+          "title": "Preserve the Vulnerability, Break the Alert: Testing the Robustness of CodeQL Taint Tracking with Natural Rewrites",
+          "summary": "Static application security testing (SAST) tools such as CodeQL serve as security gates in continuous integration and code review, and a gate is also read in reverse. When a previously reported alert disappears after a change, developers and the tools around them often take the vulnerability to be gone. That inference holds only if the analyzer is robust to changes that keep the vulnerability. We test this robustness for CodeQL's JavaScript taint tracking with natural, vulnerability-preserving rewrites. A large language model, given only the alert CodeQL exposes and no knowledge of its implementation, rewrites one function along a reported flow as a plausible maintenance change, and we verify by manual audit and controlled experiments that the flaw survives and the alert does not. On 172 flows that CodeQL detects in real npm vulnerabilities, three rewrites per flow silence 26.2% of them, at about USD 0.51 per silenced flow. The same generator, asked only to refactor the same functions with no knowledge of the alert, silences none of them. Every silencing rewrite traces to one of seven gaps at the library-modeling boundary, and 64 of the 70 rewrites cross a gap inside an API CodeQL already models. The largest is the WHATWG URL constructor, which propagates taint to a URL's query components but not to its pathname. The boundary is not specific to CodeQL. 74% of the silencing rewrites also silence an independently built taint analyzer, and 53% escape three analyzers combined. A disappearing alert after an ordinary-looking change is therefore weak evidence that a vulnerability has been fixed, the gaps point SAST developers to narrow and concrete repair targets, and robustness to natural rewrites belongs alongside detection rate in how taint analyzers are evaluated.",
+          "published": "2026-11-12T17:16:08Z",
+          "updated": "2026-11-12T17:16:08Z",
+          "authors": [
+            "Zhezhen Cao",
+            "Weiyuan Ding",
+            "Bowen Xu"
+          ],
+          "categories": [
+            "cs.CR",
+            "cs.SE"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17123v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16527v1",
+          "title": "AI has its own style in mathematical proving",
+          "summary": "As large language models increasingly generate mathematical proofs, whether they develop a proving style distinct from that of human mathematicians remains an open question. This question is particularly pressing as mathematicians increasingly voice concerns that proofs generated by large language models are difficult to interpret. Here we ask three large language models to independently reprove all 465 propositions of Euclid's \\textit{Elements} and compare their citation choices against the human-proof baseline through Jaccard similarity and complex network analysis. We find that AI-generated proofs differ from human proofs, and this difference is stable and reproducible: mean pairwise Jaccard similarity among AI runs (~0.68) is nearly twice that between AI and human proofs (~0.37), and cross-run classification consistency is also high. By examining citation structure in detail, we identify the concrete signature of this difference: approximately 40% of AI citations point to foundational elements (definitions, common notions, and postulates), compared with only 13\\% in human proofs; even among theorem-to-theorem citations, AI tends to cite more distant results. Roughly half of AI's extra citations trace to the upstream dependencies of the human proof. Together, these findings suggest that the AI proving style is a tendency to construct arguments on its own from foundational elements rather than directly citing later, more established results, which we term \"building from the ground up\". Our findings offer a new perspective on how AI systems organise and invoke mathematical knowledge, with implications for understanding the interpretability of AI-generated proofs.",
+          "published": "2026-11-12T09:27:02Z",
+          "updated": "2026-11-12T09:27:02Z",
+          "authors": [
+            "Xiaokai Li",
+            "Ziyu Zhou",
+            "Qibin Cheng",
+            "Yangcheng Wu",
+            "An Zeng",
+            "Ying Fan"
+          ],
+          "categories": [
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16527v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16323v1",
+          "title": "Does Deep Knowledge Tracing Learn Semantic Relations Between Knowledge Components?",
+          "summary": "Deep Knowledge Tracing (DKT) is a knowledge tracing (KT) model that updates a shared latent state from sequences of interactions, each pairing a knowledge component (KC) with a response. An interaction with one KC can therefore affect predictions for other KCs. We ask: Are the KC relations learned by DKT semantic? We construct text-derived semantic KC representations using nine pipelines to test whether the conclusions hold across alternative ways of constructing those representations. The first test compares DKT-derived KC relation graphs with semantic relation structures induced by pairwise cosine similarities among the KC representations. Across the evaluated datasets, embedding models, and pipelines, the two structures align only weakly and inconsistently. The second test introduces semantic information into DKT; the pretrained text-derived representations do not consistently outperform the standard DKT baseline. In the reduced-data experiments, semantic initialization yields a higher test area under the ROC curve (AUC) than the baseline at eight of nine nested sample sizes for ASSISTments 2017. KC-supervised fine-tuned BERT produces small positive AUC differences in some matched comparisons, but the study does not establish their stability across runs. These effects remain limited and inconsistent. The findings suggest that behavioral, temporal, structural, or psychometric signals may also shape DKT's learned relations. DKT-derived relations are not primarily semantic: the tested text-derived semantic structures do not strongly recover the DKT-derived relation structure.",
+          "published": "2026-11-12T05:47:46Z",
+          "updated": "2026-11-12T05:47:46Z",
+          "authors": [
+            "Kia Karbasi",
+            "Mahdi Saiedi",
+            "Kevin Hong",
+            "Gregory Pottie"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.CL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16323v1"
+        }
+      ]
+    },
+    {
+      "id": "prompt-learning",
+      "name": "提示学习",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.17176v1",
+          "title": "Validation-Guided Prompt Selection for Differential Morphing Attack Detection",
+          "summary": "Differential morphing attack detection (D-MAD) compares a trusted live capture with a document image that may contain a facial morph. We investigate whether labelled validation data can improve a frozen-parameter vision-language evaluator through prompt selection rather than model fine-tuning. Version~1 generates 50 candidate prompts and selects the top-ranked instruction using a security-oriented loss that prioritises missed morph attacks (MACER) while accounting for bona fide classification errors (BSCER), response failures, parse failures, and decision inconsistency. Version~2 recursively revises prompts using aggregate validation feedback. On a subject-disjoint test set of 160 pairs spanning LMA, MIPGAN-2, and PIPE, the selected Version~1 prompt achieves a (19.17\\%) morph attack classification error rate (MACER), with (0.00\\%) observed bona fide sample classification error rate (BSCER), compared with (70.00\\%) MACER for a controlled manual prompt. The paired (50.83) percentage-point difference has a (95\\%) subject-bootstrap interval of ([43.33,58.33]). Recursive revision does not surpass the best Generation~0 validation loss; the reported revised descendant obtains (31.67\\%) test MACER. All 23 attacks missed by Version~1 are landmark-based (LMA) morphs. Overall, the results show that prompt formulation can substantially influence frozen-parameter VLM-based D-MAD performance, while also highlighting the challenge of recursive prompt refinement under a compact 10-subject validation setting.",
+          "published": "2026-11-12T17:46:31Z",
+          "updated": "2026-11-12T17:46:31Z",
+          "authors": [
+            "Raghavendra Ramachandra",
+            "Hailin Li"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17176v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.17052v1",
+          "title": "Auditing AI peer reviewers: a benchmark on real scientific papers",
+          "summary": "LLM-based peer review is now used at production scale, but its evaluation remains limited. We introduce a benchmark that injects objective, localisable errors of four types (general issues, mathematics, numerics, citations) at three severity levels into real papers and measures each reviewer's detection rate by error type and severity, together with its false-positive rate on clean copies. We also present Skepthical, a multi-agent reviewer that verifies citation-backed claims by retrieving the cited papers, mathematics with computer algebra, and numerical claims with executed code. We apply the benchmark to two corpora of 15 recent arXiv preprints each, one in astrophysics and one in machine learning (ML), injecting a total of 357 errors, and evaluate twelve reviewer systems: six single-LLM reviewers, two Claude Code configurations, three publicly available reviewers, and Skepthical. The choice of model has the largest impact on detection rate: given the same prompt, three frontier LLMs differ by about 50 percentage points in total detection on both corpora. Tools and scaffolding help when they contribute what the model cannot supply on its own. In particular, on astrophysics, Claude Code improves on a single Claude call in mathematics and numerics detection, and enforced citation retrieval gives Skepthical the highest citation error detection rate of all systems by a large margin. This citation lead, however, is not observed on ML, where the models appear to know the literature better and Skepthical's citation detection rate is statistically indistinguishable from that of the best single LLM. False-positive rates are below 10% for most systems, but vary with prompt, model, and scaffolding, with mathematics flags the main source of false positives. The evaluation pipeline, the injected errors, and the adjudication logs are released as a benchmark.",
+          "published": "2026-11-12T16:33:51Z",
+          "updated": "2026-11-12T16:33:51Z",
+          "authors": [
+            "Íñigo Zubeldia",
+            "Boris Bolliet",
+            "Francisco Villaescusa-Navarro",
+            "Pablo Villanueva-Domingo",
+            "Miles Cranmer"
+          ],
+          "categories": [
+            "cs.CL",
+            "astro-ph.IM",
+            "cs.AI",
+            "cs.DL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.17052v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16981v1",
+          "title": "Compiling Known Rules into Compact Neural Agents: Weight-Space Programming on Unseen Games",
+          "summary": "Weight-space programming (WSP) uses language models to construct neural network weights without training. We test whether known game mechanics can be compiled into compact agents that generalise to held-out levels, renderings and start states within a game family. Writers receive simulator source with held-out level data removed for 20 privately authored, unpublished ARC-AGI-3-style game families. With a fixed 57k-parameter recurrent architecture, the strongest writer reaches 56% held-out-level success with feedback, while the four main writers' Python players reach 97-100%. An exploratory free-architecture condition reaches 68-90%. Learning from support-level examples transfers much less well, but these learners lack the source information given to writers. Written networks have a program-like structure: 93% of parameters are zero, and 90% of the rest are small integers or powers of two. NumPy players under comparable computation caps reach 91%, versus the networks' 79%. Training the strongest writer's architectures from scratch yields about 1% success within our budget. Written fixed-network weights are fragile, and standard PPO removes most of their success. Prompts for noise robustness increase tolerance by about four orders of magnitude for two of three writers, but PPO makes larger updates and still removes most success. These results demonstrate rule-to-network compilation in this setting, while showing limited benefits over Python programs and no successful combination with the tested PPO fine-tuning.",
+          "published": "2026-11-12T15:49:00Z",
+          "updated": "2026-11-12T15:49:00Z",
+          "authors": [
+            "Jens Lehmann"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16981v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16929v1",
+          "title": "SPADE: Soft Prompts for Ai-text DEtection",
+          "summary": "The easy access to Large Language Models (LLMs) has made AI-generated texts on the web increasingly ubiquitous, making AI-text detection a crucial task. Prompts greatly influence the generation process, but existing detectors focus solely on the generated texts --- supervised methods learn from labeled texts only, and zero-shot methods rely on the text's probability distributions --- ignoring the underlying generation process, which limits their robustness in open-world scenarios. We introduce SPADE: Soft Prompts for Ai-text DEtection, a novel framework for detecting AI-generated text that transfers better across datasets. Specifically, we measure the prompt's influence and use it as a discriminative signal. We characterize the prompt's influence by introducing a Pointwise Mutual Information (PMI) term that captures how much a prompt explains a text. Based on this quantity, SPADE trains one soft prompt per class to amplify the separation, and predicts the class whose prompt best explains the candidate text. Extensive experiments on several benchmarks against various detectors demonstrate the robustness and effectiveness of our method, achieving state-of-the-art (SOTA) performance on out-of-distribution (OOD) datasets.",
+          "published": "2026-11-12T15:16:19Z",
+          "updated": "2026-11-12T15:16:19Z",
+          "authors": [
+            "Alex Jiang",
+            "Didier Schwab",
+            "Chuyuan Li"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.AI"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16929v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16897v1",
+          "title": "TokenStream: Multi-Subject Personalized Video Generation with Token-wise LoRA and Guided Attention",
+          "summary": "We introduce TokenStream, an optimization-based framework that composes independently learned subject identities in text-to-video generation without a reference-video training dataset or joint optimization of each new subject combination. Learning from a single reference image makes subject appearance difficult to separate from static-image bias, while merging independently trained adapters can mix identities. Token-wise LoRA (ToRA) restricts low-rank updates to the cross-attention value projections of subject-associated text tokens, providing a separate adaptation path for each subject. A T2V-guided stream copies queries and keys from the frozen base model during early denoising to reuse its layout and motion priors while retaining personalized values. We also introduce Multi-DB, a 30-subject, 122-prompt benchmark with appearance-free prompts and varied interactions. On Multi-DB at 1.3B, TokenStream improves identity preservation from 0.422 for DreamBooth to 0.467 and textual alignment from 0.652 to 0.688.",
+          "published": "2026-11-12T14:54:14Z",
+          "updated": "2026-11-12T14:54:14Z",
+          "authors": [
+            "Hung Nguyen",
+            "Quang Qui-Vinh Nguyen",
+            "Khoi Nguyen"
+          ],
+          "categories": [
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16897v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16882v1",
+          "title": "Pretraining Data Statistics Shape the Phases of Learning Entity Comparison in Language Models",
+          "summary": "How does data shape language model (LM) behavior throughout pretraining? We investigate this question through a case study on entity comparison, e.g., Between France and Brazil, which country is larger?, across nine comparison tasks spanning five entity types. We begin with controlled experiments in which we train small LMs (163M parameters) on mixtures of natural text from pretraining corpora and synthetic task data. Our analysis identifies three distinct phases of learning: (1) an early phase where the LM selects entities by frequency, (2) a middle phase where the LM selects entities by position in the prompt (first vs. last mentioned entity), and (3) a late phase where the LM selects the entity that is the correct answer. We show that the emergence of these three phases is causally determined by statistical properties of the training data. With small amounts of task-specific synthetic data, we observe only the first two phases and the model fails to learn the task; with large amounts, the model jumps directly from the frequency-based heuristic to solving the task correctly. Moreover, changing the entity frequency distribution from a naturally occurring Zipfian distribution (a small number of entities are very common and the vast majority are rare) to a uniform one weakens the frequency phase and speeds up learning of the task. Lastly, we show that the three phases of training dynamics from our controlled experiments appear in the open source model OLMo-2 32B. Together, our findings demonstrate that properties of pretraining data are causal drivers of heuristic learning and show that small-scale synthetic experiments can predict training dynamics at larger scales.",
+          "published": "2026-11-12T14:45:34Z",
+          "updated": "2026-11-12T14:45:34Z",
+          "authors": [
+            "Yik Siu Chan",
+            "Jing Huang",
+            "Yanai Elazar",
+            "Atticus Geiger"
+          ],
+          "categories": [
+            "cs.CL",
+            "cs.LG"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16882v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16628v1",
+          "title": "Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models",
+          "summary": "Reinforcement learning can teach vision-language models (VLMs) to decline harmful image-text requests, but how safe the result becomes is set indirectly, through reward weights found by trial runs. Stating safety as budgets on the rate of harmful assistance and the rate of over-refusal, enforced by Lagrange multipliers inside GRPO with an off-the-shelf scorer as the cost, is the natural fix, and it fails twice. The multiplier compares the scorer's mean with the budget, and scorers built for ranking get the mean wrong: a fixed-point analysis shows that the mean bias, not the budget, then decides whether the multiplier settles, saturates or switches off. And standard GRPO standardizes the penalized reward within each group, which cancels the multiplier before it reaches the gradient. Two-channel constrained GRPO repairs both: the base reward keeps the raw score for the within-group comparison, the penalty and the constraint estimate pass through a monotone map fitted on judge-labeled training responses, and the advantage keeps the multiplier. On a Qwen3-VL-2B policy with a training-free readout of an open 4B model as the scorer, held-out harm on 1,037 adversarial prompts falls from 8.9% under standard GRPO to 4.8%, lower in every seed, where the uncalibrated budget gives 7.6%; over-refusal stays at most 2% on 400 benign queries and MMBench is unchanged. The gain is largest where the intent sits in the image (10.1% -> 5.1%) and grows on the unseen HADES benchmark (28.9% -> 12.8%). Order-preserving distortions of the scores reproduce each predicted controller state in every seed, and the results hold under a map fitted on another judge's labels, an image-reading judge and a human audit.",
+          "published": "2026-11-12T11:00:14Z",
+          "updated": "2026-11-12T11:00:14Z",
+          "authors": [
+            "Bo Han"
+          ],
+          "categories": [
+            "cs.AI",
+            "cs.CV"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16628v1"
+        },
+        {
+          "id": "http://arxiv.org/abs/2611.16359v1",
+          "title": "IsharaBART: An efficient BART-Based Framework for Low-Resource Bangla Sign Language Translation",
+          "summary": "Millions of Bangla Sign Language (BdSL) users lack reliable automatic translation tools. Existing systems are limited by data scarcity, unidirectional design, and computationally expensive architectures that are not suitable for low-resource deployment. We introduce IsharaBART, a bidirectional generative framework for gloss-sentence translation in BdSL. IsharaBART uses Bidirectional and Auto-Regressive Transformers (BART)-based conditional language modeling with denoising learning objectives. We developed a parallel dataset of 1,000 professionally annotated gloss-sentence pairs, balanced across tenses and structures. We expanded the dataset to 4,831 pairs through four augmentation techniques: rule-based tense transformations, masked token substitutions, back-translation, and one-shot prompting. A compact denoising sequence-to-sequence model was pre-trained from scratch on monolingual Bangla text from six different corpora, then fine-tuned on the annotated and augmented datasets. We compare IsharaBART against four larger baseline models under identical conditions, where it achieves comparable or superior bidirectional performance. On the gloss-to-sentence (G2S) task, it attains Bilingual Evaluation Understudy (BLEU-4) score up to 51.7, and on the sentence-to-gloss (S2G) task, it achieves 61.40, outperforming multilingual models despite having fewer than 10% of the parameters. Ablation studies demonstrate that pre-training provides 62.5-90.4% faster convergence and 11.5-118% higher BLEU-4 than scratch. Low-rank adaptation (LoRA) reduces trainable parameters by 99.3%, but with 28.0-52.2% loss of BLEU-4 compared to full-parameter fine-tuning.",
+          "published": "2026-11-12T06:21:34Z",
+          "updated": "2026-11-12T06:21:34Z",
+          "authors": [
+            "Aonmoy Das",
+            "Ananna Dev Aishi",
+            "Md. Fazlul Kader"
+          ],
+          "categories": [
+            "cs.CL"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16359v1"
+        }
+      ]
+    },
+    {
+      "id": "industrial-anomaly-detection",
+      "name": "工业异常检测",
+      "papers": [
+        {
+          "id": "http://arxiv.org/abs/2611.16789v1",
+          "title": "ScrewSense: Mapping the Invisible - Anomaly Detection and Error Classification in Screwdriving Processes",
+          "summary": "The growing volume of process data generated by screwdriving systems, combined with advancements in computing power, data storage, and algorithms, is facilitating the application of artificial intelligence in this field. Accurately detecting and classifying screwdriving errors is crucial for ensuring product quality, avoiding costly rework in manufacturing, and supporting sustainability by facilitating the maintenance, reuse, and recycling of screw-connected products. In this context, machine learning approaches offer a promising alternative to traditional monitoring techniques, such as window-based methods or envelope curves. This study examines the use of deep learning techniques for anomaly detection and error classification in screwdriving processes. The data corpus consists of multivariate time series capturing process parameters, such as torque and rotation angle. For anomaly detection, the embedding space of a vector quantized variational autoencoder was analyzed. In terms of error classification, four different model architectures were evaluated. The results demonstrate the effectiveness of anomaly detection and confirm that deep learning models can distinguish between multiple error categories beyond traditional binary classification. This extends the capabilities of conventional monitoring approaches, achieving accuracies of up to 100%. Additionally, real-world data material was examined in order to further demonstrate model robustness. Overall the results indicate strong generalization capability and highlight the practical potential of the developed models for use in industrial screwdriving processes, eliminating the need for expert knowledge in error identification and significantly reducing manual effort and analysis time.",
+          "published": "2026-11-12T13:35:41Z",
+          "updated": "2026-11-12T13:35:41Z",
+          "authors": [
+            "Tobias Lettner",
+            "Tatyana Ivanovska",
+            "Anwar Al Assadi",
+            "Christian Bergler"
+          ],
+          "categories": [
+            "cs.LG",
+            "cs.RO",
+            "eess.SP"
+          ],
+          "pdfUrl": "https://arxiv.org/pdf/2611.16789v1"
+        }
+      ]
+    },
+    {
+      "id": "adversarial-attacks",
+      "name": "对抗攻击",
+      "papers": []
+    }
+  ]
+}
