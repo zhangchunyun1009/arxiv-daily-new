@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "date": "2026-11-21",
-  "generatedAt": "2026-11-21T07:30:43.608Z",
-  "startedAt": "2026-11-21T07:29:48.246Z",
+  "date": "2026-11-22",
+  "generatedAt": "2026-11-22T07:11:32.662Z",
+  "startedAt": "2026-11-22T07:10:37.620Z",
   "source": "arXiv API",
   "maxResultsPerQuery": 100,
   "mode": "rolling-window-incremental",
-  "windowStart": "2026-11-20T05:34:08.352Z",
-  "windowEnd": "2026-11-21T07:29:48.246Z",
+  "windowStart": "2026-11-21T05:30:43.608Z",
+  "windowEnd": "2026-11-22T07:10:37.620Z",
   "historicalPaperCount": 5611,
   "topics": [
     {
